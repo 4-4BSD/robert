@@ -5,11 +5,11 @@ MRuby::Build.new("robert") do |conf|
   conf.linker.library_paths << File.join("/usr/local", "lib")
 
   conf.gembox "default"
-  conf.gem File.expand_path("../../mrbgemz/mruby-tui", __dir__) # git: "https://github.com/mrbgemz/mruby-tui",      branch: "main"
-  conf.gem File.expand_path("../../mrbgemz/mruby-tui-chat", __dir__) # git: "https://github.com/mrbgemz/mruby-tui-chat", branch: "main"
-  conf.gem File.expand_path("../../mrbgemz/mruby-markdown", __dir__) # git: "https://github.com/mrbgemz/mruby-markdown", branch: "main"
-  conf.gem git: "http://git.home.network/llmrb/mruby-llm",   branch: "main"
-  conf.gem git: "http://git.home.network/0x1eef/mruby-command", branch: "main"
+  conf.gem git: "https://github.com/mrbgemz/mruby-tui"      , branch: "main"
+  conf.gem git: "https://github.com/mrbgemz/mruby-tui-chat" , branch: "main"
+  conf.gem git: "https://github.com/mrbgemz/mruby-markdown" , branch: "main"
+  conf.gem git: "https://github.com/llmrb/mruby-llm"        , branch: "main"
+  conf.gem git: "https://github.com/0x1eef/mruby-command"   , branch: "main"
   conf.gem File.expand_path(__dir__)
 
   case ENV["BUILD"] || "test"
