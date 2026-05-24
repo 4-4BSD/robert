@@ -18,8 +18,8 @@ _it could_ also work with other providers.
 
 **Boot**
 
-The boot screen runs `fortune freebsd-tips` - similar
-to the default FreeBSD default `${HOME}/.profile`
+The boot screen runs `fortune freebsd-tips` <br>
+Similar to the default FreeBSD default `${HOME}/.profile`.
 
 ![robert1.png](robert1.png)
 
