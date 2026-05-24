@@ -57,6 +57,13 @@ pushed to the repository. The binary is roughly 1.78MB in size,
 and it can be downloaded
 [here](https://github.com/llmrb/robert/releases/tag/latest).
 
+## Association
+
+This project belongs to the [llm.rb](https://github.com/llmrb/llm.rb#readme) family of
+projects. The [mruby-llm](https://github.com/llmrb/mruby-llm#readme) runtime is a
+port of [llm.rb](https://github.com/llmrb/llm.rb) to CRuby, and it was used
+to build this project.
+
 ## License
 
 0BSD. See [LICENSE](LICENSE).
