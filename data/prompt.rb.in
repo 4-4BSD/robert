@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+module Robert
+  def self.prompt
+    <<~PROMPT
+__PROMPT__
+    PROMPT
+  end
+end
