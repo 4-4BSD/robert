@@ -1,0 +1,45 @@
+name: FreeBSD Build
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build robert on FreeBSD
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build in FreeBSD VM
+        uses: vmactions/freebsd-vm@v1
+        with:
+          release: 15.0
+          usesh: true
+          prepare: |
+            pkg install -y ca_root_nss curl git mbedtls ruby31
+          run: |
+            if [ ! -d ../mruby ]; then
+              git clone --depth 1 https://github.com/mruby/mruby ../mruby
+            fi
+            ruby --version
+            freebsd-version
+            make BUILD=production
+            file bin/robert
+
+      - name: Publish release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: bin/robert
+          name: Latest
+          tag: latest
+          body: |
+            Automated FreeBSD build of `robert` from the latest `main` commit.
