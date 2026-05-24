@@ -1,3 +1,5 @@
 title: "Robert: a long time FreeBSD user"
-description: A FreeBSD AI assistant in 2MB
+description: Robert is a FreeBSD AI assistant you can download as a standalone 2MB binary, built on llm.rb.
+url: "https://llmrb.github.io"
+baseurl: "/robert"
 markdown: kramdown
