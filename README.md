@@ -43,7 +43,9 @@ Confirmation required to read files.
 
 ![robert4.png](robert4.png)
 
-## ASCIICast
+**Screencast**
+
+See a live demo at [asciinema.org](https://asciinema.org/a/WSB4P4DCiG91325y)
 
 [![asciicast](https://asciinema.org/a/WSB4P4DCiG91325y.svg)](https://asciinema.org/a/WSB4P4DCiG91325y)
 
