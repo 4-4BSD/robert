@@ -1,0 +1,62 @@
+---
+mruby:
+  version: 4.0.0
+  release_no: 40000
+  git_commit: b1adab4e87659dc880d8bcc60a1134ace14124c1
+builds:
+  robert:
+    https://github.com/mrbgemz/mruby-tui:
+      url: https://github.com/mrbgemz/mruby-tui
+      branch: main
+      commit: 1a422a62408430d1bb8d71f5dfe2264b5223fd04
+      version: 0.1.0
+    https://github.com/mrbgemz/mruby-tui-chat:
+      url: https://github.com/mrbgemz/mruby-tui-chat
+      branch: main
+      commit: 4e42aa0da1b2a95a7e8e875409e3144f9c90b53a
+      version: 0.1.0
+    https://github.com/mrbgemz/mruby-markdown:
+      url: https://github.com/mrbgemz/mruby-markdown
+      branch: main
+      commit: 56ba9c05679a15dd2d888776e1c47ee35ed8cfbd
+      version: 0.1.0
+    https://github.com/llmrb/mruby-llm:
+      url: https://github.com/llmrb/mruby-llm
+      branch: main
+      commit: 8cd54a0e0a5e902eeefd93fddcb3ac38f14c8f7d
+      version: 0.1.0.beta
+    https://github.com/0x1eef/mruby-command:
+      url: https://github.com/0x1eef/mruby-command
+      branch: main
+      commit: d6060c09b4b29bdd98dba8806e6f472815332843
+      version: 0.1.0
+    https://github.com/0x1eef/mruby-termbox2.git:
+      url: https://github.com/0x1eef/mruby-termbox2.git
+      branch: main
+      commit: c6325d2c01c4013239989a4e2b5611e373019027
+      version: 0.1.0
+    https://github.com/mattn/mruby-http.git:
+      url: https://github.com/mattn/mruby-http.git
+      branch: master
+      commit: 003c2af0a059c50a3546001860108ff4bf3a2cac
+      version: 0.0.0
+    https://github.com/llmrb/mruby-curl.git:
+      url: https://github.com/llmrb/mruby-curl.git
+      branch: master
+      commit: 15c8d98e31a41bb80ba30444210c0861904e1c07
+      version: 0.0.0
+    https://github.com/mattn/mruby-json.git:
+      url: https://github.com/mattn/mruby-json.git
+      branch: master
+      commit: f99d9428025469f2400f93c53b185f65f963e507
+      version: 0.0.0
+    https://github.com/ksss/mruby-stringio.git:
+      url: https://github.com/ksss/mruby-stringio.git
+      branch: master
+      commit: 32acb9ea9ad1aa1db8088625252988e98770188a
+      version: 0.0.0
+    https://github.com/0x1eef/mruby-process.git:
+      url: https://github.com/0x1eef/mruby-process.git
+      branch: main
+      commit: 5b51c4a11abc1444f89a61302fc8b7d0a8ab77df
+      version: 0.1.0
