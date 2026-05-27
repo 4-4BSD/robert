@@ -11,7 +11,8 @@ module Robert
     [
       Tools::ManPage,
       Tools::ManSearch,
-      Tools::ReadFile
+      Tools::ReadFile,
+      Tools::Version
     ]
   end
 

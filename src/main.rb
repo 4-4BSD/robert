@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 def main(argv)
+  while option = argv.shift
+    case option
+    when '-v'
+      puts Robert::VERSION
+      exit(0)
+    else
+      $stderr.puts "robert: bad option #{option}"
+      exit(1)
+    end
+  end
+
   llm       = LLM.deepseek(key: ENV["DEEPSEEK_SECRET"])
   ui        = Robert::Tree.build(llm)
   ui.stream = Robert::Stream.new(ui)
