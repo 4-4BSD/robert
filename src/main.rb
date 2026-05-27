@@ -20,12 +20,18 @@ def main(argv)
   dispatch  = Robert::Dispatch.new(LLM::Object.from(llm:, agent:, ui: agent.ui))
 
   TUI.run(ui.root) do
-    catch(:breakout) do
-      loop do
-        TUI.draw(ui.root)
-        dispatch.on_event(TUI.read_event)
+    Task.new(name: "event-loop") do
+      TUI.draw(ui.root)
+      catch(:breakout) do
+        loop do
+          dispatch.tick(ui.root)
+          while event = TUI.peek_event(50)
+            dispatch.on_event(event)
+          end
+        end
       end
     end
+    Task.run
   end
 end
 main(ARGV)

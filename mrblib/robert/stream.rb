@@ -1,24 +1,13 @@
 # frozen_string_literal: true
 
 module Robert
-  ##
-  # The {Stream} class implements a stream object
-  # that wraps a UI tree, and controls the UI through
-  # it.
   class Stream < LLM::Stream
-    ##
-    # @param [LLM::Object] ui
-    # @return [Robert::Stream]
     def initialize(ui)
       @tools = []
       @ui = ui
       @buffer = +""
     end
 
-    ##
-    # @param [String] chunk
-    #  A chunk
-    # @return [void]
     def on_content(chunk)
       buffer << chunk
       render_assistant
@@ -26,10 +15,6 @@ module Robert
       redraw!
     end
 
-    ##
-    # @param [LLM::Tool, nil] tool
-    # @param [LLM::Function::Return, nil]
-    # @return [void]
     def on_tool_call(tool, error)
       return queue << error if error
       tools << {
@@ -41,10 +26,6 @@ module Robert
       redraw!
     end
 
-    ##
-    # @param [LLM::Tool] tool
-    # @param [LLM::Function::Return]
-    # @return [void]
     def on_tool_return(tool, result)
       index = tools.index { _1[:id] == tool.id }
       tools[index] = {
@@ -65,9 +46,6 @@ module Robert
       end
     end
 
-    ##
-    # Clear the buffer
-    # @return [void]
     def clear
       @buffer = ""
       @tools  = []
@@ -124,6 +102,31 @@ module Robert
 
     def redraw!
       TUI.draw(ui.root)
+    end
+  end
+
+  ##
+  # {QueueStream} is used by the worker task to stream LLM output
+  # through a {Task::Queue} back to the event-loop task.
+  class QueueStream < LLM::Stream
+    def initialize(queue)
+      @queue = queue
+    end
+
+    def on_content(chunk)
+      @queue.push("content:#{chunk}")
+    end
+
+    def on_tool_call(tool, error)
+      return queue << error if error
+      @queue.push("tool_call:#{tool.name}")
+    end
+
+    def on_tool_return(tool, result)
+      @queue.push("tool_call:#{tool.name}")
+    end
+
+    def clear
     end
   end
 end

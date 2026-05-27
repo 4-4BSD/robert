@@ -5,6 +5,7 @@ MRuby::Build.new("robert") do |conf|
   conf.linker.library_paths << File.join("/usr/local", "lib")
 
   conf.gembox "default"
+  conf.gem core: "mruby-task"
   conf.gem git: "https://github.com/mrbgemz/mruby-tui"      , branch: "main"
   conf.gem git: "https://github.com/mrbgemz/mruby-tui-chat" , branch: "main"
   conf.gem git: "https://github.com/mrbgemz/mruby-markdown" , branch: "main"
