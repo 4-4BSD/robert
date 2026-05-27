@@ -2,10 +2,11 @@
 
 Robert is designed to help you learn about FreeBSD through its official
 documentation and man pages. It is distributed as a standalone, 2MB
-binary.
+binary. The [website](https://llmrb.github.com/robert) provides a
+rich introduction with screenshots and a screencast.
 
-It currently requires DeepSeek because it is almost free to use but
-_it could_ also work with other providers.
+Robert requires DeepSeek, and it is almost free to use but
+robert _could_ also work with other providers.
 
 ## Appearance
 
@@ -34,12 +35,6 @@ No confirmation required to read, or search man pages. <br>
 Confirmation required to read files.
 
 ![robert4.png](robert4.png)
-
-**Screencast**
-
-See a live demo at [asciinema.org](https://asciinema.org/a/WSB4P4DCiG91325y)
-
-[![asciicast](https://asciinema.org/a/WSB4P4DCiG91325y.svg)](https://asciinema.org/a/WSB4P4DCiG91325y)
 
 ## Install
 
