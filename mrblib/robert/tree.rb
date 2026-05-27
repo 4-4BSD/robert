@@ -30,7 +30,7 @@ module Robert
       ui.banner = banner
       ui.right_fill = fill(width: 0.2)
       ui.status = status_bar(llm)
-      ui.input = TUI::Input.new(height: 3, fg: :default, bg: :default, valign: :middle)
+      ui.input = TUI::Input.new(height: 3, fg: Theme::FG_MUTED, bg: Theme::BG_DEFAULT, valign: :middle)
       ui.center.show(ui.banner)
       ui.body.add(ui.left_fill)
       ui.body.add(ui.center)
@@ -44,13 +44,13 @@ module Robert
     private
 
     def fill(width:)
-      TUI::Fill.new(width:, fg: :default, bg: :default)
+      TUI::Fill.new(width:, fg: Theme::FG_MUTED, bg: Theme::BG_DEFAULT)
     end
 
     def chat
       TUI::Chat.new(
         roles: true,
-        assistant_fg: :red,
+        assistant_fg: Theme::FG_PRIMARY,
         labels: {user: "You", assistant: "Robert"}
       )
     end
@@ -59,8 +59,8 @@ module Robert
       Widgets::Splash.new(
         "FreeBSD Tip:",
         Robert.boot_message,
-        fg: :white,
-        bg: :default
+        fg: Theme::FG_PRIMARY,
+        bg: Theme::BG_DEFAULT
       )
     end
 
@@ -70,8 +70,8 @@ module Robert
       TUI::StatusBar.new(
         llm ? "Idle" : "No LLM configured",
         right: llm.key? ? "" : "set DEEPSEEK_SECRET",
-        fg: :white,
-        bg: :default
+        fg: Theme::FG_SECONDARY,
+        bg: Theme::BG_DEFAULT
       )
     end
   end
