@@ -9,16 +9,27 @@ module Robert
       @ui = context.ui
       @llm = context.llm
       @agent = context.agent
+      @last_event = 0.0
     end
 
     ##
     # @param [Termbox2::Event<TUI::Event>] event
     # @return [void]
     def on_event(event)
-      if event.key?(:CTRL_C) || event.key?(:ESC)
+      now = Time.now.to_f
+      elapsed = now - @last_event
+      @last_event = now
+
+      if event.key?(:CTRL_C)
         throw(:breakout)
+      elsif event.key?(:ENTER) && elapsed < 0.05
+        ui.input.put("\n")
+        redraw!
       elsif event.key?(:ENTER)
         on_submit(event)
+        redraw!
+      elsif event.ch == 0x0A
+        ui.input.put("\n")
         redraw!
       elsif TUI.backspace?(event.key)
         ui.input.backspace
@@ -56,11 +67,11 @@ module Robert
     def talk(prompt)
       agent.talk(prompt)
       status_bar.left = "Idle"
-      status_bar.right = ""
+      status_bar.right = Tree::HINTS
     rescue => ex
       ui.chat.replace_last(:assistant, "Error: #{ex.class}: #{ex.message}")
-      status_bar.left = "Request failed"
-      status_bar.right = ex.class.to_s
+      status_bar.left = "Idle"
+      status_bar.right = Tree::HINTS
     end
 
     def status_bar
