@@ -11,7 +11,7 @@ module Robert::Widgets
     # @param [Integer, Symbol] fg
     # @param [Integer, Symbol] bg
     # @param [Hash] kw
-    def initialize(title, body, fg: :white, bg: :default, **kw)
+    def initialize(title, body, fg: Theme::FG_PRIMARY, bg: Theme::BG_DEFAULT, **kw)
       super(**kw)
       @title = title.to_s
       @lines = body.to_s.each_line.map(&:chomp)
