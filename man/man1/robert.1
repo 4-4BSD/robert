@@ -1,0 +1,73 @@
+.\"
+.\" Copyright (c) 2026 llmrb
+.\"
+.\" Permission to use, copy, modify, and/or distribute this software for
+.\" any purpose with or without fee is hereby granted.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd May 26, 2026
+.Dt ROBERT 1
+.Os
+.Sh NAME
+.Nm robert
+.Nd learn FreeBSD through its official documentation and man pages
+.Sh SYNOPSIS
+.Nm
+.Op Fl v
+.Sh DESCRIPTION
+.Nm
+is designed to help you learn about FreeBSD through its official
+documentation and man pages.
+It is distributed as a standalone, 2MB binary.
+.Pp
+It uses
+.Ev DEEPSEEK_SECRET
+to authenticate with the model provider, and answers questions by
+reading man pages and searching the manual page database.
+.Pp
+The options are as follows:
+.Bl -tag -width indent
+.It Fl v
+Print the version of
+.Nm
+and exit.
+.El
+.Sh ENVIRONMENT
+.Bl -tag -width DEEPSEEK_SECRET
+.It Ev DEEPSEEK_SECRET
+The API key used to authenticate with the model provider.
+.El
+.Sh FILES
+.Bl -tag -width /usr/share/man -compact
+.It Pa /usr/share/man
+The manual page database used by
+.Nm
+to search for and read man pages.
+.El
+.Sh TOOLS
+The following tools are available to the assistant:
+.Bl -tag -width "man-search"
+.It Ic man-page
+Read a manual page by name and optional section.
+.It Ic man-search
+Search the manual page database using
+.Xr apropos 1 .
+.It Ic read-file
+Read a text file from the filesystem.
+This tool requires confirmation before execution.
+.El
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr apropos 1 ,
+.Xr man 1
+.Sh AUTHORS
+.An llmrb
+.Pa https://github.com/llmrb/robert
