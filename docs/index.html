@@ -9,8 +9,9 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 2
     <div class="size-badge">2MB binary</div>
     <h1>Robert</h1>
     <p class="subtitle">
-      A native FreeBSD AI assistant. Reads man pages, searches documentation,
-      and helps you troubleshoot &mdash; all in a 2MB standalone binary.
+      Robert is designed to help you learn about FreeBSD through its
+      official documentation and man pages. Robert is distributed as
+      a standalone, 2MB binary.
     </p>
     <a class="install" href="https://github.com/llmrb/robert/releases/latest">
       <span>Download from GitHub Releases</span>
@@ -24,7 +25,6 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 2
     <div class="asciicast-wrap is-loading">
       <div class="asciicast-header">
         <span>Robert</span>
-        <span>FreeBSD terminal session</span>
       </div>
       <div class="asciicast" id="asciicast-container"></div>
     </div>
@@ -153,7 +153,7 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 2
 
 <script>
   (function() {
-    var castUrl = 'https://asciinema.org/a/WSB4P4DCiG91325y.cast';
+    var castUrl = 'https://asciinema.org/a/p5UGn9lKb3IVUAO9.cast';
     var container = document.getElementById('asciicast-container');
     if (!container || typeof AsciinemaPlayer === 'undefined') return;
     var wrapper = container.closest('.asciicast-wrap');
@@ -167,6 +167,7 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 2
           autoPlay: false,
           preload: true,
           fit: 'width',
+          theme: 'tango',
           cols: size.width,
           rows: size.height,
           terminalLineHeight: 1.2
@@ -198,9 +199,13 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 2
         })
         .then(function(text) {
           var header = JSON.parse(text.split('\n', 1)[0]);
+          var term = header.term || {};
+          var width = header.width || term.cols;
+          var height = header.height || term.rows;
+          if (!width || !height) throw new Error('cast size missing');
           return {
-            width: header.width,
-            height: header.height
+            width: width,
+            height: height
           };
         });
     }
