@@ -1,19 +1,11 @@
 ## About
 
-**Who is Robert?**
+Robert is designed to help you learn about FreeBSD through its official
+documentation and man pages. It is distributed as a standalone, 2MB
+binary.
 
-Robert has been using FreeBSD since the early 2000s,
-and the first release he installed was 4.4-RELEASE.
-He is an expert at reading and searching manual pages,
-and sometimes he can read files.
-
-**What is Robert?**
-
-Robert is Artificial Intelligence packaged as a
-native, 2MB FreeBSD binary. It currently requires
-DeepSeek because it is almost free to use but
+It currently requires DeepSeek because it is almost free to use but
 _it could_ also work with other providers.
-
 
 ## Appearance
 
