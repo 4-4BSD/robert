@@ -30,7 +30,7 @@ module Robert
         ui.status.left = "Cancelled"
         ui.status.right = Tree::HINTS
         redraw!
-      elsif event.key?(:CTRL_C)
+      elsif event.key?(:CTRL_D)
         throw(:breakout)
       elsif event.key?(:ENTER) && elapsed < 0.05
         ui.input.put("\n")
@@ -134,7 +134,7 @@ module Robert
       ui.chat.add(:user, message)
       ui.chat.add(:assistant, "")
       ui.status.left = "Thinking..."
-      ui.status.right = ""
+      ui.status.right = "Ctrl+C to cancel"
       _agent = agent
       @task = Task.new(name: "agent") do
         _agent.talk(message)

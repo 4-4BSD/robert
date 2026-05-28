@@ -15,7 +15,7 @@ module Robert
   #   ├── StatusBar (height: 1)
   #   └── TextArea (height: 5)
   module Tree
-    HINTS = "\u2191\u2193 scroll \u00b7 Ctrl+C exit"
+    HINTS = "\u2191\u2193 scroll \u00b7 Ctrl+D exit"
 
     extend self
 
