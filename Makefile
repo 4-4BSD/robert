@@ -7,6 +7,7 @@
 #   make        # build toolchain and run tests
 #   make test   # run tests
 #   make clean  # clean build artifacts
+#   make install  # install binary and man page to $(PREFIX)
 
 MRUBY_DIR    ?= ../mruby
 BUILD_CONFIG  = build.rb
@@ -14,6 +15,9 @@ BUILD_NAME    = robert
 BUILD_DIR     = $(MRUBY_DIR)/build/$(BUILD_NAME)
 BUILD ?= test
 RUBY_GEM_FILES != find mrblib -type f 2>/dev/null | sort
+
+PREFIX      ?= /usr/local
+MANPREFIX   ?= $(PREFIX)/man
 
 ENTRYPOINT = src/main.rb
 STANDALONE_FILES = main.c
@@ -36,7 +40,7 @@ MRBC_FLAGS =
 POST_BUILD = true
 .endif
 
-.PHONY: all toolchain standalone clean distclean
+.PHONY: all toolchain standalone clean distclean install
 
 all: toolchain standalone
 
@@ -89,3 +93,9 @@ distclean: clean
 	rm $$(pwd)/*.lock || true
 	rm -rf $(BUILD_DIR)
 	rm -rf $(MRUBY_DIR)/build/repos/$(BUILD_NAME)
+
+install: $(STANDALONE_BIN)
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
+	install -m 755 $(STANDALONE_BIN) $(DESTDIR)$(PREFIX)/bin/robert
+	install -m 644 man/man1/robert.1 $(DESTDIR)$(MANPREFIX)/man1/robert.1
