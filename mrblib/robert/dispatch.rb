@@ -114,7 +114,7 @@ module Robert
     # Render the accumulated assistant stream as markdown.
     # @return [TUI::Markdown::Node]
     def assistant_text
-      Markdown.new([@labels.join("\n"), @buffer].join("\n")).ast
+      Markdown.new([@labels.join("\n"), "\n", @buffer].join("\n")).ast
     end
 
     ##
