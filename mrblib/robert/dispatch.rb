@@ -49,6 +49,12 @@ module Robert
       elsif event.key?(:DOWN)
         ui.chat.scroll_down
         redraw!
+      elsif event.key?(:PGUP)
+        (ui.chat.rh / 2).times { ui.chat.scroll_up }
+        redraw!
+      elsif event.key?(:PGDN)
+        (ui.chat.rh / 2).times { ui.chat.scroll_down }
+        redraw!
       elsif event.ch == 0x15
         ui.input.clear
         redraw!
