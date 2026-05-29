@@ -3,8 +3,8 @@
 MRuby::Gem::Specification.new("robert") do |spec|
   spec.license = "0BSD"
   spec.authors = "0x1eef <0x1eef@hardenedbsd.org>"
-  spec.version = "0.1.0.beta"
-  spec.description = "Robert man pages"
+  spec.version = "0.1.0"
+  spec.description = "Robert is designed to help you learn about FreeBSD"
   spec.rbfiles = Dir[
     File.expand_path("mrblib/*.rb", __dir__),
     File.expand_path("mrblib/**/*.rb", __dir__),
