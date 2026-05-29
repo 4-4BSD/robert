@@ -36,12 +36,33 @@ Confirmation required to read files.
 
 ![robert4.png](robert4.png)
 
-## Install
+## Tools
 
-[GitHub builds a binary](.github/workflows/freebsd-build.yml) from
-the repository's source code and it is run every time a commit is
-pushed to the repository. The binary is roughly 1.78MB in size,
-and it can be downloaded
+| Tool | Description | Confirmation |
+|------|-------------|--------------|
+| `man-page` | Returns the contents of a man page (optionally by section) | No |
+| `man-search` | Searches manual pages for keywords via `apropos` | No |
+| `read-file` | Reads a file from the filesystem | Yes |
+| `version` | Reports Robert's version number | No |
+
+## Build from source
+
+Robert is an mruby gem built with the mruby-llm runtime. To build
+from source, check out the repository and use the included Makefile:
+
+```sh
+git clone https://github.com/llmrb/robert.git
+cd robert
+make
+```
+
+The Makefile expects an mruby checkout at `../mruby`. Override with
+`MRUBY_DIR=/path/to/mruby` if needed.
+
+## Download
+
+A pre-built FreeBSD binary (~1.78MB) is built by GitHub Actions on
+every push and can be downloaded
 [here](https://github.com/llmrb/robert/releases/tag/latest).
 
 ## Association
