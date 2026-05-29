@@ -70,7 +70,7 @@ module Robert
     # @param [LLM::Object] ui
     # @return [void]
     def tick(ui)
-      while event = pop_event
+      while event = pop
         kind, data = event
         case kind
         when "content"
@@ -95,9 +95,9 @@ module Robert
           ui.status.right = Tree::HINTS
         when "cancel"
           ui.status.left = "Cancelled"
-          return
         when "error"
-          ui.chat.replace_last(:assistant, data)
+          err = data
+          ui.chat.replace_last(:assistant, "#{err.class}: #{err.message}")
         end
       end
       if task&.status == :DORMANT
@@ -110,16 +110,26 @@ module Robert
 
     attr_reader :llm, :agent, :task, :ui, :confirmation
 
+    ##
+    # Render the accumulated assistant stream as markdown.
+    # @return [TUI::Markdown::Node]
     def assistant_text
       Markdown.new([@labels.join("\n"), @buffer].join("\n")).ast
     end
 
-    def pop_event
+    ##
+    # Pop the next pending stream event without blocking.
+    # @return [Array(String, Object), nil]
+    def pop
       agent.queue.pop(true)
     rescue Task::Error
       nil
     end
 
+    ##
+    # Route keyboard input to the active tool confirmation prompt.
+    # @param [Termbox2::Event<Robert::Event>] event
+    # @return [void]
     def on_confirmation_event(event)
       if event.key?(:CTRL_C) || event.key?(:ESC) || event.ch == ?n.ord || event.ch == ?N.ord
         confirmation.deny
@@ -130,29 +140,46 @@ module Robert
       end
     end
 
+    ##
+    # Submit the input buffer and start an assistant task.
+    # @param [Termbox2::Event<Robert::Event>] _event
+    # @return [void]
     def on_submit(_event)
-      return if ui.input.empty?
-      @buffer = +""
-      @labels = []
-      message = ui.input.value
+      return if ui.input.empty? || ui.busy
+      @buffer, @labels = +"", []
+      talk, msg, _agent, _ui = method(:talk), ui.input.value, agent, ui
+      ui.busy = true
       ui.center.show(ui.chat) unless showing_chat?
       ui.input.clear
-      ui.chat.add(:user, message)
+      ui.chat.add(:user, msg)
       ui.chat.add(:assistant, "")
       ui.status.left = "Thinking..."
       ui.status.right = Tree::CANCEL_HINT
-      _agent = agent
-      @task = Task.new(name: "agent") do
-        _agent.talk(message)
-        _agent.queue.push ["done", nil]
-      rescue LLM::Interrupt
-        _agent.queue.push ["cancel", nil]
-      rescue => e
-        _agent.queue.push ["error", "error: #{e.class}: #{e.message}"]
-      end
+      @task = Task.new(name: "agent") { talk.(msg, _agent, _ui) }
       TUI.draw(ui.root)
     end
 
+    ##
+    # Run the assistant turn in a task and report completion back to the UI queue.
+    # @param [String] msg
+    # @param [Robert::Agent] agent
+    # @param [LLM::Object] ui
+    # @return [void]
+    def talk(msg, agent, ui)
+      agent.talk(msg)
+      agent.queue.push ["done", nil]
+    rescue LLM::Interrupt
+      agent.queue.push ["cancel", nil]
+    rescue => err
+      agent.queue.push ["error", err]
+    ensure
+      ui.busy = false
+    end
+
+    ##
+    # Stop a running task and clear the active task reference.
+    # @param [Task] task
+    # @return [void]
     def terminate(task)
       task.terminate
     rescue
@@ -161,6 +188,10 @@ module Robert
       @task = nil
     end
 
+    ##
+    # Build the status label shown while a tool is running.
+    # @param [LLM::Function] fn
+    # @return [String]
     def tool_running_label(fn)
       case fn.name
       when "man-search"
@@ -174,6 +205,10 @@ module Robert
       end
     end
 
+    ##
+    # Build the status label shown after a tool returns.
+    # @param [LLM::Function] fn
+    # @return [String]
     def tool_finished_label(fn)
       case fn.name
       when "man-search"
@@ -187,16 +222,25 @@ module Robert
       end
     end
 
+    ##
+    # Interrupt the active assistant request, falling back to task termination.
+    # @return [void]
     def interrupt
       agent.interrupt!
     rescue
       terminate(task)
     end
 
+    ##
+    # Redraw the current UI tree.
+    # @return [void]
     def redraw!
       TUI.draw(ui.root)
     end
 
+    ##
+    # Returns true when the chat widget is visible in the center pane.
+    # @return [Boolean]
     def showing_chat?
       ui.chat.parent == ui.center
     end
