@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -32,13 +34,30 @@ jobs:
             make BUILD=production
             file bin/robert
 
-      - name: Publish release
+      - name: Rename binary for latest release
+        if: github.ref_type == 'branch'
+        run: cp bin/robert bin/robert-latest
+
+      - name: Publish latest release
+        if: github.ref_type == 'branch'
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: bin/robert-latest
+          name: Latest
+          tag: latest
+          body: |
+            Automated FreeBSD build of `robert` from the latest `main` commit.
+
+      - name: Publish tagged release
+        if: github.ref_type == 'tag'
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
           artifacts: bin/robert
-          name: Latest
-          tag: latest
+          name: ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}
           body: |
-            Automated FreeBSD build of `robert` from the latest `main` commit.
+            FreeBSD build of `robert` version ${{ github.ref_name }}.
