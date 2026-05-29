@@ -41,6 +41,7 @@ end
 def crash(err)
   puts "#{err.class}: #{err.message}"
   err.backtrace.each { puts _1 }
+  exit 1
 end
 
 main(ARGV)
