@@ -24,14 +24,14 @@ jobs:
         with:
           usesh: true
           prepare: |
-            pkg install -y ca_root_nss curl git mbedtls4 rubygem-rake
+            pkg install -y ca_root_nss curl git gmake rubygem-rake
           run: |
             if [ ! -d ../mruby ]; then
               git clone --depth 1 https://github.com/mruby/mruby ../mruby
             fi
             ruby --version
             freebsd-version
-            make BUILD=production
+            make static
             file bin/robert
 
       - name: Rename binary for latest release

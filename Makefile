@@ -19,6 +19,25 @@ RUBY_GEM_FILES != find mrblib -type f 2>/dev/null | sort
 PREFIX      ?= /usr/local
 MANPREFIX   ?= $(PREFIX)/man
 
+CURL_VERSION    ?= 8.20.0
+MBEDTLS_VERSION ?= 3.6.5
+STATIC_PREFIX   ?= ${.CURDIR}/vendor/static
+STATIC_DISTDIR  ?= ${.CURDIR}/vendor/dist
+STATIC_BUILDDIR ?= ${.CURDIR}/vendor/build
+STATIC_JOBS     ?= 2
+FETCH           ?= fetch
+GMAKE           ?= gmake
+
+CURL_TARBALL    = $(STATIC_DISTDIR)/curl-$(CURL_VERSION).tar.xz
+CURL_SRCDIR     = $(STATIC_BUILDDIR)/curl-$(CURL_VERSION)
+CURL_URL        = https://curl.se/download/curl-$(CURL_VERSION).tar.xz
+MBEDTLS_TARBALL = $(STATIC_DISTDIR)/mbedtls-$(MBEDTLS_VERSION).tar.bz2
+MBEDTLS_SRCDIR  = $(STATIC_BUILDDIR)/mbedtls-$(MBEDTLS_VERSION)
+MBEDTLS_URL     = https://github.com/Mbed-TLS/mbedtls/releases/download/mbedtls-$(MBEDTLS_VERSION)/mbedtls-$(MBEDTLS_VERSION).tar.bz2
+
+STATIC_CFLAGS   = -Os -ffunction-sections -fdata-sections -DNDEBUG
+STATIC_LDFLAGS  = -Wl,--gc-sections
+
 ENTRYPOINT = src/main.rb
 STANDALONE_FILES = main.c
 STANDALONE_BIN = bin/robert
@@ -40,13 +59,70 @@ MRBC_FLAGS =
 POST_BUILD = true
 .endif
 
-.PHONY: all toolchain standalone clean distclean install
+.PHONY: all toolchain standalone static static-deps static-clean clean distclean install
 
 all: toolchain standalone
+
+static: static-deps
+	$(MAKE) BUILD=production STATIC=1 CURLDIR=$(STATIC_PREFIX) standalone
+
+static-deps: $(STATIC_PREFIX)/lib/libcurl.a $(STATIC_PREFIX)/lib/libmbedtls.a
 
 toolchain: $(TOOLCHAIN_STAMP)
 
 standalone: $(STANDALONE_BIN)
+
+$(CURL_TARBALL):
+	mkdir -p $(STATIC_DISTDIR)
+	$(FETCH) -o $(CURL_TARBALL) $(CURL_URL)
+
+$(MBEDTLS_TARBALL):
+	mkdir -p $(STATIC_DISTDIR)
+	$(FETCH) -o $(MBEDTLS_TARBALL) $(MBEDTLS_URL)
+
+$(STATIC_PREFIX)/lib/libmbedtls.a: $(MBEDTLS_TARBALL)
+	rm -rf $(MBEDTLS_SRCDIR)
+	mkdir -p $(STATIC_BUILDDIR) $(STATIC_PREFIX)
+	tar -xf $(MBEDTLS_TARBALL) -C $(STATIC_BUILDDIR)
+	$(GMAKE) -C $(MBEDTLS_SRCDIR) lib CFLAGS="$(STATIC_CFLAGS)" -j$(STATIC_JOBS)
+	mkdir -p $(STATIC_PREFIX)/include $(STATIC_PREFIX)/lib
+	cp -R $(MBEDTLS_SRCDIR)/include/mbedtls $(STATIC_PREFIX)/include/
+	cp -R $(MBEDTLS_SRCDIR)/include/psa $(STATIC_PREFIX)/include/
+	cp $(MBEDTLS_SRCDIR)/library/libmbedtls.a $(STATIC_PREFIX)/lib/
+	cp $(MBEDTLS_SRCDIR)/library/libmbedx509.a $(STATIC_PREFIX)/lib/
+	cp $(MBEDTLS_SRCDIR)/library/libmbedcrypto.a $(STATIC_PREFIX)/lib/
+
+$(STATIC_PREFIX)/lib/libcurl.a: $(CURL_TARBALL) $(STATIC_PREFIX)/lib/libmbedtls.a
+	rm -rf $(CURL_SRCDIR)
+	mkdir -p $(STATIC_BUILDDIR) $(STATIC_PREFIX)
+	tar -xf $(CURL_TARBALL) -C $(STATIC_BUILDDIR)
+	cd $(CURL_SRCDIR) && env \
+		CPPFLAGS="-I$(STATIC_PREFIX)/include" \
+		CFLAGS="$(STATIC_CFLAGS)" \
+		LDFLAGS="-L$(STATIC_PREFIX)/lib $(STATIC_LDFLAGS)" \
+		./configure \
+			--prefix=$(STATIC_PREFIX) \
+			--disable-shared \
+			--enable-static \
+			--disable-all \
+			--enable-http \
+			--enable-symbol-hiding \
+			--disable-manual \
+			--disable-threaded-resolver \
+			--without-brotli \
+			--without-gssapi \
+			--without-libidn2 \
+			--without-libpsl \
+			--without-nghttp2 \
+			--without-nghttp3 \
+			--without-ngtcp2 \
+			--without-openssl \
+			--without-quiche \
+			--without-zlib \
+			--without-zstd \
+			--with-mbedtls=$(STATIC_PREFIX)
+	$(GMAKE) -C $(CURL_SRCDIR) -j$(STATIC_JOBS)
+	$(GMAKE) -C $(CURL_SRCDIR) install
 
 $(TOOLCHAIN_STAMP): $(BUILD_CONFIG) mrbgem.rake $(RUBY_GEM_FILES) $(PROMPT_OUT)
 	mkdir -p tmp bin
@@ -82,6 +158,9 @@ $(STANDALONE_BIN): $(STANDALONE_OBJ) $(STANDALONE_IREP) $(TOOLCHAIN_STAMP) $(STA
 $(PROMPT_OUT): $(PROMPT_IN) $(PROMPT_SRC)
 	mkdir -p build/mrblib/robert
 	ruby -e "puts File.read('$(PROMPT_IN)').sub('__PROMPT__', File.read('$(PROMPT_SRC)'))" > $(PROMPT_OUT)
+
+static-clean:
+	rm -rf $(STATIC_BUILDDIR) $(STATIC_PREFIX)
 
 clean:
 	rm -f $(TOOLCHAIN_BIN)
