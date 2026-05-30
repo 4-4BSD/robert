@@ -1,7 +1,4 @@
 <p align="center">
-  <img src="./robert.svg" width=500 height=140 alt="Robert logo">
-</p>
-<p align="center">
   <a href="https://llmrb.github.io/robert">
     <img src="https://img.shields.io/badge/docs-llmrb.github.io/robert-blue.svg" alt="Website">
   </a>
