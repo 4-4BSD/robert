@@ -70,7 +70,9 @@ module Robert
     # @param [LLM::Object] ui
     # @return [void]
     def tick(ui)
+      requires_redraw = false
       while event = pop
+        requires_redraw = true
         kind, data = event
         case kind
         when "content"
@@ -103,7 +105,7 @@ module Robert
       if task&.status == :DORMANT
         @task = nil
       end
-      TUI.draw(ui.root)
+      TUI.draw(ui.root) if requires_redraw
     end
 
     private
