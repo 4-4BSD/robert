@@ -2,6 +2,8 @@
 
 module Robert
   class Dispatch
+    include Scroll
+
     ##
     # @param [LLM::Object] context
     # @return [Robert::Dispatch]
@@ -14,6 +16,7 @@ module Robert
       @task = nil
       @confirmation = nil
       @labels = []
+      @scroll_delta = 0
     end
 
     ##
@@ -44,17 +47,13 @@ module Robert
         ui.input.backspace
         redraw!
       elsif event.key?(:UP)
-        ui.chat.scroll_up
-        redraw!
+        scroll_later(1)
       elsif event.key?(:DOWN)
-        ui.chat.scroll_down
-        redraw!
+        scroll_later(-1)
       elsif event.key?(:PGUP)
-        (ui.chat.rh / 2).times { ui.chat.scroll_up }
-        redraw!
+        scroll_now(ui.chat.rh / 2)
       elsif event.key?(:PGDN)
-        (ui.chat.rh / 2).times { ui.chat.scroll_down }
-        redraw!
+        scroll_now(-(ui.chat.rh / 2))
       elsif event.ch == 0x15
         ui.input.clear
         redraw!
@@ -71,6 +70,7 @@ module Robert
     # @return [void]
     def tick(ui)
       requires_redraw = false
+      requires_redraw = apply_scroll if @scroll_delta != 0
       while event = pop
         requires_redraw = true
         kind, data = event
