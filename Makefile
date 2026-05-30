@@ -25,6 +25,7 @@ STATIC_PREFIX   ?= ${.CURDIR}/vendor/static
 STATIC_DISTDIR  ?= ${.CURDIR}/vendor/dist
 STATIC_BUILDDIR ?= ${.CURDIR}/vendor/build
 STATIC_JOBS     ?= 2
+CA_BUNDLE       ?= /etc/ssl/cert.pem
 FETCH           ?= fetch
 GMAKE           ?= gmake
 
@@ -109,6 +110,8 @@ $(STATIC_PREFIX)/lib/libcurl.a: $(CURL_TARBALL) $(STATIC_PREFIX)/lib/libmbedtls.
 			--enable-symbol-hiding \
 			--disable-manual \
 			--disable-threaded-resolver \
+			--with-ca-bundle=$(CA_BUNDLE) \
+			--without-ca-path \
 			--without-brotli \
 			--without-gssapi \
 			--without-libidn2 \
