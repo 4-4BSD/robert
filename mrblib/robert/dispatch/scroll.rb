@@ -5,10 +5,10 @@ class Robert::Dispatch
   # {Scroll} keeps repeated arrow-key scrolling responsive.
   #
   # Terminals can queue many up/down key-repeat events while a key is held.
-  # Robert drains pending input events before each draw, and this module
-  # coalesces those arrow-key repeats into a single pending row movement per
-  # event-loop tick. Page up/down still scroll immediately because they are
-  # explicit larger jumps.
+  # If Robert redraws for every queued repeat, scrolling can continue after
+  # the key has been released. This module coalesces arrow-key scrolls into a
+  # single pending row movement per event-loop tick. Page up/down still scroll
+  # immediately because they are explicit larger jumps.
   #
   # Submitting a message returns the chat to follow mode by clearing pending
   # scroll movement before the next response starts streaming.
@@ -47,6 +47,7 @@ class Robert::Dispatch
     # @return [void]
     def follow!
       @scroll_delta = 0
+      ui.chat.follow!
     end
 
     private

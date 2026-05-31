@@ -78,12 +78,15 @@ module Robert
         when "content"
           @buffer << data
           ui.chat.append(:assistant, assistant_text)
+          follow!
         when "tool_call"
           @labels << tool_running_label(data)
           ui.chat.replace_last(:assistant, assistant_text)
+          follow!
         when "tool_return"
           @labels << tool_finished_label(data)
           ui.chat.replace_last(:assistant, assistant_text)
+          follow!
         when "confirmation"
           @confirmation = data
           ui.status.left = data.prompt
@@ -100,6 +103,7 @@ module Robert
         when "error"
           err = data
           ui.chat.replace_last(:assistant, "#{err.class}: #{err.message}")
+          follow!
         end
       end
       if task&.status == :DORMANT
