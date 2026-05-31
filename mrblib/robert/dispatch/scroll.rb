@@ -9,6 +9,9 @@ class Robert::Dispatch
   # the key has been released. This module coalesces arrow-key scrolls into a
   # single pending row movement per event-loop tick. Page up/down still scroll
   # immediately because they are explicit larger jumps.
+  #
+  # Submitting a message returns the chat to follow mode by clearing pending
+  # scroll movement before the next response starts streaming.
   module Scroll
     ##
     # Queue scroll movement so repeated arrow-key events are coalesced.
@@ -37,6 +40,13 @@ class Robert::Dispatch
       @scroll_delta = 0
       scroll_by(delta)
       redraw!
+    end
+
+    ##
+    # Return chat scrolling to follow mode after a new message is submitted.
+    # @return [void]
+    def follow!
+      @scroll_delta = 0
     end
 
     private

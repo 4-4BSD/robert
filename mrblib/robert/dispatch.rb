@@ -155,6 +155,7 @@ module Robert
       ui.input.clear
       ui.chat.add(:user, msg)
       ui.chat.add(:assistant, "")
+      follow!
       ui.status.left = "Thinking..."
       ui.status.right = Tree::CANCEL_HINT
       @task = Task.new(name: "agent") { talk.(msg, _agent, _ui) }
