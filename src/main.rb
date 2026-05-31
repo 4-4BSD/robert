@@ -23,20 +23,29 @@ def main(argv)
     TUI.run(ui.root) do
       TUI.draw(ui.root)
       catch(:breakout) do
-        loop do
-          while event = TUI.peek_event
-            dispatch.on_event(event)
-          end
-          dispatch.tick(ui)
-          Task.pass
-          sleep_ms 25
-        end
+        loop { tick(dispatch, ui) }
       end
     end
   rescue => err
     crash(err)
   end
   Task.run
+end
+
+def tick(dispatch, ui)
+  scrolled = false
+  64.times do
+    event = TUI.peek_event(0)
+    break unless event
+    if event.key?(:UP) || event.key?(:DOWN)
+      next if scrolled
+      scrolled = true
+    end
+    dispatch.on_event(event)
+  end
+  dispatch.tick(ui)
+  Task.pass
+  sleep_ms 5
 end
 
 def crash(err)
