@@ -24,6 +24,7 @@ def main(argv)
 
   Task.new(name: "event-loop") do
     TUI.run(ui.root) do
+      Termbox2.set_input_mode(Termbox2::INPUT_ALT)
       TUI.draw(ui.root)
       catch(:breakout) do
         loop { tick(dispatch, ui) }
