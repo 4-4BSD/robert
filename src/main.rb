@@ -8,6 +8,16 @@ def main(argv)
       exit(0)
     when '-d'
       $DEBUG = true
+    when '-h'
+      $stderr.puts <<~USAGE
+      robert [OPTIONS]
+
+      Options:
+        -h  Show help
+        -v  Show version
+        -d  Enable debug mode
+      USAGE
+      exit(0)
     else
       $stderr.puts "robert: bad option #{option}"
       exit(1)
