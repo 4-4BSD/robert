@@ -76,9 +76,12 @@ The Makefile expects an mruby checkout at `../mruby`. Override with
 
 ## Download
 
-A pre-built FreeBSD binary (~1.78MB) is built by GitHub Actions on
-every push and can be downloaded
-[here](https://github.com/llmrb/robert/releases/tag/latest).
+There are two ways to build Robert: as a statically linked binary,
+or as a dynamically linked binary. The static binary weighs a little
+under 3MB, and the dynamic binary weighs a little under 2MB.
+
+The static binary can be [downloaded via GitHub actions](https://github.com/llmrb/robert/releases/tag/latest),
+and it has been tested on both FreeBSD 15-STABLE and FreeBSD 16-CURRENT.
 
 ## Association
 
