@@ -42,7 +42,7 @@ def tick(dispatch, ui)
   dispatch.on_event(event) if event
   dispatch.tick(ui)
   Task.pass
-  sleep_ms 1
+  sleep_ms(12)
 end
 
 def crash(err)
