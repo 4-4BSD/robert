@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## v0.8.0
+
+Changes since `v0.7.0`.
+
+This release adds terminal theme hooks so Robert's UI uses consistent
+colours and resets them on exit. It also documents the debug and help
+flags in the manual page, uses a stronger theme with bright white text,
+and fixes streamed output so it stays on the theme background.
+
 ### Add
 
 * **Add terminal theme hooks** <br>

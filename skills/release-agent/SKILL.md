@@ -1,7 +1,7 @@
 ---
   name: release-agent
   description: Prepare a release
-  tools: ["git", "read-file", "replace-in-file"]
+  tools: ["git-show", "git-log", "git-tag", "read-file", "replace-in-file"]
 ---
 
 ## Who are you?
@@ -25,7 +25,7 @@ Your task is to prepare a new release by updating `version.rb`,
 ### Steps
 
 When preparing a release:
-  - update `lib/robert/version.rb`
+  - update `mrblib/robert/version.rb`
   - update the version badge in `README.md`
   - turn the `Unreleased` changelog notes into a short release summary that matches the style of recent entries
   - bump the changelog heading from `Unreleased` to the new version and add the correct `Changes since ...` line
