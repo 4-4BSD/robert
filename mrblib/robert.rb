@@ -38,10 +38,13 @@ module Robert
 
   ##
   # Unapply Robert's terminal theme
+  # @return [void]
   def self.unset_theme
     Termbox2.set_clear_attrs(
       TUI.color(:default),
       TUI.color(:default)
     )
+  rescue Termbox2::Error
+    nil
   end
 end

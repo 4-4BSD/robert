@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Fix
+
+* **Preserve crash output during terminal cleanup** <br>
+  Run terminal theme cleanup while the TUI is still initialized, and
+  ignore cleanup errors after termbox has already been torn down so the
+  original crash can still be reported.
+
 ## v0.8.0
 
 Changes since `v0.7.0`.

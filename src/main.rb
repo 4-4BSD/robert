@@ -35,15 +35,17 @@ def main(argv)
   Task.new(name: "event-loop") do
     TUI.run(ui.root) do
       Robert.set_theme
-      TUI.draw(ui.root)
-      catch(:breakout) do
-        loop { tick(dispatch, ui) }
+      begin
+        TUI.draw(ui.root)
+        catch(:breakout) do
+          loop { tick(dispatch, ui) }
+        end
+        Robert.debug "Robert has exited"
+      ensure
+        Robert.unset_theme
       end
-      Robert.unset_theme
-      Robert.debug "Robert has exited"
     end
   rescue => err
-    Robert.unset_theme
     Robert.debug "Robert has crashed"
     crash(err)
   end
