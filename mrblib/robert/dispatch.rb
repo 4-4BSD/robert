@@ -230,6 +230,8 @@ module Robert
     # @return [String]
     def tool_running_label(fn)
       case fn.name
+      when "read-file"
+        "• Reading file: #{fn.arguments.path}"
       when "find"
         "• find #{fn.arguments.root} -name #{fn.arguments.name}"
       when "man-search"
@@ -249,6 +251,8 @@ module Robert
     # @return [String]
     def tool_finished_label(fn)
       case fn.name
+      when "read-file"
+        "• Read file: #{fn.arguments.path}"
       when "find"
         "• find complete"
       when "man-search"
