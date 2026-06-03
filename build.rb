@@ -1,7 +1,7 @@
 MRuby::Build.new("robert") do |conf|
   profile = ENV["BUILD"] || "test"
+  static  = ENV["STATIC"] == "1"
   curldir = File.expand_path(ENV["CURLDIR"] || "/usr/local")
-  static = ENV["STATIC"] == "1"
 
   conf.toolchain
   conf.cc.include_paths << File.join(curldir, "include")
