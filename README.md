@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="robert.png" alt="Robert logo" width="128">
+  <a href="http://llmrb.github.io/robert">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi39c9ab6rTHulzqrvy45M_omMN8cUyRxfaAph0UhlpubhMxgnJVyOEarYGmHNZgt1uUZmO8cobmrloSiAfxUjgjNOVvRZrF9n9b5tO0S-sG7e9DHfalqyYQZm6aY1jV55IzPbGPA/s1600/freebsd_jail.png" width="200" height="200" border="0" alt="mruby-jail">
+  </a>
   <br>
   <strong>Robert</strong>
 </p>
