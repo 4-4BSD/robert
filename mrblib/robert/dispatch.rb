@@ -124,13 +124,11 @@ module Robert
     end
 
     ##
-    # Periodically force a full repaint while idle.
+    # Periodically redraw while idle.
     #
     # Some terminals can lose their visible alternate-screen contents when
-    # switching windows or sessions. Termbox still believes those cells are
-    # present, so normal diffed redraws may not repaint anything until input
-    # arrives. Invalidating the front buffer makes the next draw repaint the
-    # whole screen.
+    # switching windows or sessions. A lightweight redraw lets Robert recover
+    # without waiting for the next key press.
     #
     # @return [void]
     def refresh
@@ -138,8 +136,7 @@ module Robert
       now = Time.now.to_f
       return if now - @last_idle_refresh < 1.0
       @last_idle_refresh = now
-      Robert.debug "Refreshing idle UI and invalidating terminal front buffer."
-      Termbox2.invalidate
+      Robert.debug "Refreshing idle UI."
       TUI.draw(ui.root)
     end
 

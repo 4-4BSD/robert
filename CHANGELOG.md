@@ -18,9 +18,9 @@ errors after termbox has already been torn down.
   original crash can still be reported.
 
 * **Repaint idle terminals after screen loss** <br>
-  Periodically invalidate termbox's front buffer and redraw while Robert
-  is idle, so terminals that lose their alternate-screen contents repaint
-  without waiting for the next key press.
+  Periodically redraw while Robert is idle, so terminals that lose their
+  alternate-screen contents can repaint without waiting for the next key
+  press.
 
 ## v0.8.0
 
