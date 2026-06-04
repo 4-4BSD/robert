@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## v0.10.0
+
+Changes since `v0.9.0`.
+
+This release adds new `find` and `grep` tools for searching files and
+text on the filesystem, validates filesystem tool requests, improves
+tool status labels, routes command-backed tools through sanitized result
+payloads, and strips unsafe control bytes from tool output.
+
 ### Add
 
 * **Add file and directory search tool** <br>
