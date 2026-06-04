@@ -228,18 +228,20 @@ module Robert
     # @return [String]
     def tool_running_label(fn)
       case fn.name
+      when "version"
+        "• Discovering Robert's version"
       when "read-file"
-        "• Reading file: #{fn.arguments.path}"
+        "• Read: #{fn.arguments.path}"
       when "find"
-        "• find #{fn.arguments.root} -name #{fn.arguments.name}"
+        "• find #{fn.arguments.root} -name #{fn.arguments.name} -maxdepth #{fn.arguments.maxdepth || 1}"
       when "grep"
         "• grep #{fn.arguments.string} #{fn.arguments.root}"
       when "man-search"
-        "• Searching man page database: #{fn.arguments.keywords.join(", ")}"
+        "• Search man page database: #{fn.arguments.keywords.join(", ")}"
       when "man-page"
         page = fn.arguments.name
         page = "#{page}(#{fn.arguments.section})" if fn.arguments.section
-        "• Reading man page: #{page}"
+        "• Read man page: #{page}"
       else
         "• call: #{fn.name}"
       end
