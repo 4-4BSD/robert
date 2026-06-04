@@ -13,13 +13,13 @@ module Robert::Tools
       elsif string.strip.empty?
         raise Robert::Error, "string is empty"
       else
-        {results: spawn(root:, string:, maxdepth:).stdout[0..3_000]}
+        {results: Robert.spawn(command(root:, string:, maxdepth:))}
       end
     end
 
     private
 
-    def spawn(root:, string:, maxdepth:)
+    def command(root:, string:, maxdepth:)
       Command
         .new("find")
         .argv(root)

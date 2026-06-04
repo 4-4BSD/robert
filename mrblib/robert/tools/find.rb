@@ -16,13 +16,13 @@ module Robert::Tools
       elsif kind.strip.empty?
         raise Robert::Error, "kind is required"
       else
-        {results: spawn(name:, root:, kind:, maxdepth:).stdout}
+        {results: Robert.spawn(command(name:, root:, kind:, maxdepth:))}
       end
     end
 
     private
 
-    def spawn(name:, root:, kind:, maxdepth:)
+    def command(name:, root:, kind:, maxdepth:)
       Command
         .new("find")
         .argv(root)

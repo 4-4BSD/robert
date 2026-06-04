@@ -24,9 +24,43 @@ module Robert
   ##
   # @return [String]
   def self.boot_message
-    Command.new("fortune", "freebsd-tips").stdout.to_s.strip
+    spawn Command.new("fortune", "freebsd-tips")
   rescue
     ""
+  end
+
+  ##
+  # Spawns a command
+  # @param [Command] cmd
+  # @return [String]
+  def self.spawn(cmd)
+    sanitize(cmd.stdout)
+  end
+
+  ##
+  # Remove control bytes that cannot safely be sent as JSON string content.
+  #
+  # Tool output can contain NUL or other C0 control bytes, especially when
+  # reading arbitrary files. Keep normal text whitespace and preserve all
+  # printable bytes, including UTF-8 byte sequences.
+  #
+  # @param [Object] value
+  # @return [Object]
+  def self.sanitize(value)
+    case value
+    when String
+      output = +""
+      value.each_byte do |byte|
+        output << byte if byte == 9 || byte == 10 || byte == 13 || byte >= 32
+      end
+      output
+    when Array
+      value.map { sanitize(_1) }
+    when Hash
+      value.each_with_object({}) { |(key, val), hash| hash[key] = sanitize(val) }
+    else
+      value
+    end
   end
 
   ##

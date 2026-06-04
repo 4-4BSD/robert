@@ -8,7 +8,7 @@ module Robert::Tools
     required %i[path]
 
     def call(path:)
-      {content: File.read(path)}
+      {content: Robert.sanitize(File.read(path))}
     end
   end
 end

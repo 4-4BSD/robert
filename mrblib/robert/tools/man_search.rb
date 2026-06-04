@@ -8,12 +8,12 @@ module Robert::Tools
     required %i[keywords]
 
     def call(keywords:)
-      {results: spawn(keywords:).stdout}
+      {results: Robert.spawn(command(keywords:))}
     end
 
     private
 
-    def spawn(keywords:)
+    def command(keywords:)
       Command
         .new("apropos")
         .argv(*keywords)

@@ -12,7 +12,7 @@ module Robert::Tools
     required %i[name]
 
     def call(name:, section: nil)
-      {contents: clean(spawn(name:, section:).stdout)}
+      {contents: clean(Robert.spawn(command(name:, section:)))}
     end
 
     private
@@ -40,7 +40,11 @@ module Robert::Tools
       text
     end
 
-    def spawn(name:, section:)
+    ##
+    # @param [String] name
+    # @param [Integer] section
+    # @return [Command]
+    def command(name:, section:)
       Command
         .new("man")
         .argv(*[section ? section.to_s : nil, name.to_s].compact)
