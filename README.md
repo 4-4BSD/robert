@@ -72,7 +72,7 @@ It only pauses for confirmation when reading files.
 | `man-page` | Returns the contents of a man page (optionally by section) | No |
 | `man-search` | Searches manual pages for keywords via `apropos` | No |
 | `read-file` | Reads a file from the filesystem | Yes |
-| `find` | Searches for files and directories from a root path | No |
+| `find` | Searches for files and directories from a root path | Yes |
 | `grep` | Searches for text across files below a root path | Yes |
 | `version` | Reports Robert's version number | No |
 
