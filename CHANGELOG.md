@@ -12,9 +12,10 @@
 
 * **Add text search tool** <br>
   Add a `grep` tool so Robert can search for text across files below a
-  requested root path, cap returned output, and show grep-specific
-  status labels while the tool runs. Document `find` and `grep` in the
-  README and on the project site.
+  requested root path, require confirmation before running it, cap
+  returned output, and show grep-specific status labels while the tool
+  runs. Document `find` and `grep` in the README and on the project
+  site.
 
 ## v0.9.0
 

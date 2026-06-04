@@ -55,6 +55,8 @@ module Robert::Widgets
     # @return [String]
     def prompt
       case tool.name
+      when "grep"
+        "Allow robert to grep for #{tool.arguments.string} in #{tool.arguments.root} ?"
       when "read-file"
         "Allow robert to read #{tool.arguments.path} ?"
       else

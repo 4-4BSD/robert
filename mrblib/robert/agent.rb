@@ -9,7 +9,7 @@ module Robert
   class Agent < LLM::Agent
     instructions Robert.prompt
     tools { Robert.tools }
-    confirm "read-file"
+    confirm "read-file", "grep"
 
     attr_accessor :ui
 
