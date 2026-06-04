@@ -8,10 +8,12 @@ module Robert::Tools
     required %i[root string]
 
     def call(root:, string:, maxdepth: 1)
-      if maxdepth <= 3
-        {results: spawn(root:, string:, maxdepth:).stdout[0..3_000]}
+      if maxdepth > 2
+        raise Robert::Error, "maximum maxdepth is 2"
+      elsif string.strip.empty?
+        raise Robert::Error, "string is empty"
       else
-        raise Robert::Error, "maximum maxdepth is 3"
+        {results: spawn(root:, string:, maxdepth:).stdout[0..3_000]}
       end
     end
 
