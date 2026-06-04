@@ -4,32 +4,31 @@
 
 ### Add
 
-* **Add file and directory search tool** <br>
-  Add a `find` tool so Robert can search for files and directories from
-  a requested root path, require confirmation before running it, advertise
-  that capability in the system prompt, show find-specific status labels
-  while the tool runs, and document it on the project site.
-
-* **Add text search tool** <br>
-  Add a `grep` tool so Robert can search for text across files below a
-  requested root path, require confirmation before running it, cap
-  returned output, show grep-specific status labels while the tool runs,
-  and document it in the README and on the project site.
-
-* **Add read-file tool status labels** <br>
-  Show read-file-specific status labels while Robert is reading files so
-  filesystem tool activity is visible in the status bar.
+* **Add filesystem search tools** <br>
+  Add `find` and `grep` tools so Robert can search for files, directories,
+  and text below a requested root path. Both tools require confirmation,
+  use bounded output, show tool-specific status labels, and are documented
+  in the README and project site.
 
 ### Changed
 
-* **Limit filesystem search depth** <br>
-  Enforce a maximum `maxdepth` of 3 for the `find` and `grep` tools so
+* **Validate filesystem tool requests** <br>
+  Reject empty `find` and `grep` queries, and cap their `maxdepth` at 2 so
   filesystem searches stay bounded.
 
 * **Update tool status labels** <br>
-  Shorten file and man-page status labels, include `find` depth in the
-  running label, and show a dedicated label when Robert checks its
-  version.
+  Shorten file and man-page labels, include `find` depth in the running
+  label, add a `version` label, and remove noisy finished labels.
+
+* **Use sanitized command results** <br>
+  Route command-backed tools through `Robert.spawn`, returning sanitized
+  `{stdout:, stderr:}` payloads instead of raw strings.
+
+### Fix
+
+* **Strip unsafe control bytes from tool output** <br>
+  Add `Robert.sanitize` so file and command output cannot put raw C0
+  control bytes into the next JSON request body.
 
 ## v0.9.0
 
