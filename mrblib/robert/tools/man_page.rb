@@ -12,7 +12,7 @@ module Robert::Tools
     required %i[name]
 
     def call(name:, section: nil)
-      {contents: clean(Robert.spawn(command(name:, section:)))}
+      clean Robert.spawn(command(name:, section:))
     end
 
     private

@@ -8,7 +8,7 @@ module Robert::Tools
     required %i[keywords]
 
     def call(keywords:)
-      {results: Robert.spawn(command(keywords:))}
+      Robert.spawn(command(keywords:))
     end
 
     private

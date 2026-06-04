@@ -13,7 +13,7 @@ module Robert::Tools
       elsif string.strip.empty?
         raise Robert::Error, "string is empty"
       else
-        {results: Robert.spawn(command(root:, string:, maxdepth:))}
+        Robert.spawn(command(root:, string:, maxdepth:))
       end
     end
 

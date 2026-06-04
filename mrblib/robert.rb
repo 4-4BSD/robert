@@ -23,8 +23,8 @@ module Robert
 
   ##
   # @return [String]
-  def self.boot_message
-    spawn Command.new("fortune", "freebsd-tips")
+  def self.fortune
+    Command.new("fortune", "freebsd-tips").stdout
   rescue
     ""
   end
@@ -34,7 +34,7 @@ module Robert
   # @param [Command] cmd
   # @return [String]
   def self.spawn(cmd)
-    sanitize(cmd.stdout)
+    sanitize({stdout: cmd.stdout, stderr: cmd.stderr})
   end
 
   ##

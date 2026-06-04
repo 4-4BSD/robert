@@ -63,7 +63,7 @@ module Robert
     def banner
       Widgets::Splash.new(
         "FreeBSD Tip:",
-        Robert.boot_message,
+        Robert.fortune,
         fg: Theme::FG_SECONDARY,
         bg: Theme::BG_DEFAULT
       )
