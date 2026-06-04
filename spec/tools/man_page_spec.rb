@@ -18,6 +18,11 @@ describe "Robert::Tools::ManPage" do
         input = "_\b/_\bb_\bi_\bn_\b/   fundamental BSD user utilities"
         expect(clean.call(input)).must_equal "/bin/   fundamental BSD user utilities"
       end
+
+      it "removes underscore wrappers from paths" do
+        input = "_/dev_ device nodes and special files"
+        expect(clean.call(input)).must_equal "/dev device nodes and special files"
+      end
     end
 
     context "with plain text" do

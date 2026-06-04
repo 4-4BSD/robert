@@ -12,7 +12,7 @@ module Robert::Tools
     required %i[name]
 
     def call(name:, section: nil)
-      clean Robert.spawn(command(name:, section:))
+      Robert.spawn(command(name:, section:)).transform_values { clean(_1) }
     end
 
     private
@@ -23,7 +23,8 @@ module Robert::Tools
     # Man output can encode underlined text as "_\bX" and bold text as
     # "X\bX". If those sequences reach the model, paths like "/bin/" may be
     # quoted back as "_/_b_bin_/". This keeps tool output plain before it is
-    # added to the conversation.
+    # added to the conversation. It also removes underscore wrappers around
+    # paths that have already been converted to plain text, such as "_/dev_".
     #
     # @param [String] output
     # @return [String]
@@ -37,6 +38,7 @@ module Robert::Tools
         text = text.gsub(Regexp.new(".#{backspace}"), "")
         break if text == before
       end
+      text = text.gsub(/_(\/[^_ ]+)_/, "\\1")
       text
     end
 
