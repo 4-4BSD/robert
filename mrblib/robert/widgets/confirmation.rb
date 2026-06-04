@@ -23,10 +23,11 @@ module Robert::Widgets
     # @return [LLM::Function::Return]
     def confirm(strategy)
       ui.stream.task_queue.push ["confirmation", self]
-      result = @queue.pop == :allow ?
-        tool.spawn(strategy).wait :
+      if @queue.pop == :allow
+        tool.spawn(strategy).wait
+      else
         tool.cancel(reason: "user denied tool execution")
-      result
+      end
     ensure
       ui.stream.task_queue.push ["confirmation_done", nil]
     end
@@ -35,6 +36,8 @@ module Robert::Widgets
     # Approve the pending tool call.
     # @return [void]
     def allow
+      ui.status.left, ui.status.right = "Please wait.", ""
+      TUI.draw(ui.root)
       resolve(:allow)
     end
 
@@ -55,8 +58,10 @@ module Robert::Widgets
     # @return [String]
     def prompt
       case tool.name
+      when "find"
+        "Allow robert search for the file #{tool.arguments.name} in #{tool.arguments.root} ?"
       when "grep"
-        "Allow robert to grep for #{tool.arguments.string} in #{tool.arguments.root} ?"
+        "Allow robert to search for the term #{tool.arguments.string} in #{tool.arguments.root} ?"
       when "read-file"
         "Allow robert to read #{tool.arguments.path} ?"
       else
