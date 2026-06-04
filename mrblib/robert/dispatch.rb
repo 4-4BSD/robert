@@ -89,8 +89,6 @@ module Robert
           ui.chat.replace_last(:assistant, assistant_text)
           follow!
         when "tool_return"
-          @labels << tool_finished_label(data)
-          ui.chat.replace_last(:assistant, assistant_text)
           follow!
         when "confirmation"
           @confirmation = data
@@ -244,27 +242,6 @@ module Robert
         "• Reading man page: #{page}"
       else
         "• call: #{fn.name}"
-      end
-    end
-
-    ##
-    # Build the status label shown after a tool returns.
-    # @param [LLM::Function] fn
-    # @return [String]
-    def tool_finished_label(fn)
-      case fn.name
-      when "read-file"
-        "• Read file: #{fn.arguments.path}"
-      when "grep", "find"
-        "• #{fn.name} complete"
-      when "man-search"
-        "• Search complete (#{fn.arguments.keywords.join(", ")})"
-      when "man-page"
-        page = fn.arguments.name
-        page = "#{page}(#{fn.arguments.section})" if fn.arguments.section
-        "• Read man page: #{page}"
-      else
-        "• done: #{fn.name}"
       end
     end
 
