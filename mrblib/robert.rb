@@ -1,5 +1,6 @@
 module Robert
   extend Debug
+  Error = Class.new(RuntimeError)
 
   module Tools
   end
