@@ -9,9 +9,15 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
     <div class="size-badge">3MB binary</div>
     <h1>Robert</h1>
     <p class="subtitle">
-      Robert is designed to help you learn about FreeBSD. He runs entirely in your
+      Robert is an AI assistant that helps you learn FreeBSD by reading
+      official man pages and documentation. It runs entirely in your
       terminal and ships as a statically linked, ~3MB binary &mdash; no
       dependencies, no Electron, no browser needed.
+    </p>
+    <p class="subtitle">
+      Ask questions in plain English. Robert searches man pages, reads them,
+      and answers with cited excerpts from official docs &mdash; not its
+      training data.
     </p>
     <a class="install" href="https://github.com/llmrb/robert/releases/latest">
       <span>Download from GitHub Releases</span>
@@ -82,7 +88,7 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
       </div>
       <div class="feature">
         <h3>Tool confirmation</h3>
-        <p>Reading files and filesystem searches require approval. Man page search doesn't. Sensible defaults that respect your privacy.</p>
+        <p>Reading and searching man pages is automatic. Reading files and filesystem searches require approval.</p>
       </div>
       <div class="feature">
         <h3>Streaming responses</h3>
@@ -94,7 +100,7 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
       </div>
       <div class="feature">
         <h3>DeepSeek</h3>
-        <p>Uses DeepSeek by default because it's almost free. Could work with any OpenAI-compatible provider.</p>
+        <p>Uses DeepSeek by default because it costs pennies to use. Could work with any OpenAI-compatible provider.</p>
       </div>
     </div>
   </div>
@@ -113,10 +119,6 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
         <div class="tool-desc">Search the man page database with apropos.</div>
       </div>
       <div class="tool-card">
-        <div class="tool-name">version</div>
-        <div class="tool-desc">Report Robert's version number.</div>
-      </div>
-      <div class="tool-card">
         <div class="tool-name">read-file</div>
         <div class="tool-desc">Read a text file on the system.</div>
         <div class="tool-confirm">requires confirmation</div>
@@ -131,6 +133,30 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
         <div class="tool-desc">Search for text across files below a root path.</div>
         <div class="tool-confirm">requires confirmation</div>
       </div>
+      <div class="tool-card">
+        <div class="tool-name">version</div>
+        <div class="tool-desc">Report Robert's version number.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>How It Works</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Grounded answers</h3>
+        <p>The system prompt forbids using training data. Every claim must cite a man page via blockquote.</p>
+      </div>
+      <div class="feature">
+        <h3>Cooperative scheduler</h3>
+        <p>The LLM call runs in a worker task while the event loop keeps the terminal UI responsive.</p>
+      </div>
+      <div class="feature">
+        <h3>Roff sanitisation</h3>
+        <p>Raw man output is cleaned before it reaches the model, preventing garbled paths from roff overstrike formatting.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -140,16 +166,19 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
     <h2>Details</h2>
     <div class="details-list">
       <div class="detail-item">
+        <strong>Download</strong> &mdash; Static binaries are published for FreeBSD 15-STABLE and 16-CURRENT.
+      </div>
+      <div class="detail-item">
         <strong>License</strong> &mdash; 0BSD. Do whatever you want.
       </div>
       <div class="detail-item">
         <strong>Build</strong> &mdash; CI builds on FreeBSD via GitHub Actions.
       </div>
       <div class="detail-item">
-        <strong>Stack</strong> &mdash; mruby-llm + mruby-tui + mruby-markdown.
+        <strong>Stack</strong> &mdash; mruby-llm, the mruby port of llm.rb, plus mruby-tui and mruby-markdown.
       </div>
       <div class="detail-item">
-        <strong>Version</strong> &mdash; v0.8.1.
+        <strong>Version</strong> &mdash; v0.10.0.
       </div>
     </div>
   </div>
