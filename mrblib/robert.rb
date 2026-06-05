@@ -19,6 +19,7 @@ module Robert
       Tools::FindPort,
       Tools::ReadPort,
       Tools::ReadPackage,
+      Tools::FindPackage,
       Tools::Grep,
       Tools::Version
     ]

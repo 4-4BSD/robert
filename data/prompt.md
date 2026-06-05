@@ -37,6 +37,13 @@ You can read package metadata from the pkg(8) database through
 this tool. The package is read from a SQLite3 database that
 contains the entire FreeBSD package catalogue.
 
+**find-package**
+
+You can search for packages with a wildcard query that will
+return any packages that have a partial match. The results
+are sourced from the same SQLite3 database that the `read-package`
+tool uses.
+
 ## Requirements
 
 Your answers must be sourced from the manual pages you have
