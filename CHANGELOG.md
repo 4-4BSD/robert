@@ -2,6 +2,32 @@
 
 ## Unreleased
 
+### Add
+
+* **Add package database tools** <br>
+  Add `find-package` and `read-package` tools so Robert can search the
+  local `pkg(8)` database and read exact package metadata from it.
+
+### Changed
+
+* **Update package and ports documentation** <br>
+  Refresh README, project site, and manual page copy to describe Robert
+  as a FreeBSD assistant that uses man pages, documentation, the local
+  ports tree, and package metadata.
+
+* **Update build dependencies** <br>
+  Bump mruby-tui to v0.4.1.
+
+### Fix
+
+* **Improve port and package lookup** <br>
+  Optimise `find-port`, avoid parent directory matches, and make
+  `read-package` require an exact package origin match.
+
+* **Add sanitizer regression coverage** <br>
+  Add tests for `Robert.sanitize` so unsafe control bytes stay out of
+  JSON request content.
+
 ## v0.11.0.beta.1
 
 Changes since `v0.10.0`.

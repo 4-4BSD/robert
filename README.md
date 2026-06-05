@@ -9,12 +9,13 @@
 ## About
 
 Robert is an AI assistant for FreeBSD. It answers questions using
-official man pages, documentation, and the local ports tree. It runs
-entirely in your terminal and ships as a **statically linked, ~3MB
-binary** - no dependencies, no Node.js, no Electron, no browser needed.
+official man pages, documentation, the local ports tree, and package
+metadata. It runs entirely in your terminal and ships as a **statically
+linked, ~3MB binary** - no dependencies, no Node.js, no Electron, no
+browser needed.
 
 Ask questions about FreeBSD in plain English. Robert searches man
-pages, the filesystem, and ports metadata, then answers with **cited
+pages, the filesystem, ports, and packages, then answers with **cited
 excerpts** from official docs - not its training data. It runs on
 DeepSeek and costs pennies to use.
 
@@ -64,9 +65,10 @@ automatic. Reading files and filesystem searches require confirmation.
 ## Tools
 
 Robert chains these tools autonomously: it searches man pages, the
-filesystem, and the local ports tree; reads files and port metadata; and
-synthesises answers without hand-holding. It only pauses for confirmation
-when reading files or searching the filesystem.
+filesystem, the local ports tree, and the package database; reads files,
+port metadata, and package metadata; and synthesises answers without
+hand-holding. It only pauses for confirmation when reading files or
+searching the filesystem.
 
 | Tool | Description | Confirmation |
 |------|-------------|--------------|
@@ -77,6 +79,8 @@ when reading files or searching the filesystem.
 | `grep` | Searches for text across files below a root path | Yes |
 | `find-port` | Searches a local ports tree for a port name | No |
 | `read-port` | Reads a port's `Makefile`, `pkg-descr`, and `distinfo` | No |
+| `find-package` | Searches the `pkg(8)` database for package origins | No |
+| `read-package` | Reads exact package metadata from the `pkg(8)` database | No |
 | `version` | Reports Robert's version number | No |
 
 ## How it works
@@ -102,6 +106,10 @@ architecture is designed for a single-purpose terminal app:
 
   Robert can search and read a local FreeBSD ports tree. It uses
   `${PORTSDIR}` when set, otherwise `/usr/ports`.
+- **Package database lookup**
+
+  Robert can search and read package metadata from the local `pkg(8)`
+  database.
 - **Grounded answers**
 
   The system prompt explicitly forbids using training data. Every

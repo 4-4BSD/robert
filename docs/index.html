@@ -10,13 +10,14 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
     <h1>Robert</h1>
     <p class="subtitle">
       Robert is an AI assistant for FreeBSD. It answers questions using
-      official man pages, documentation, and the local ports tree. It runs
-      entirely in your terminal and ships as a statically linked, ~3MB
-      binary &mdash; no dependencies, no Node.js, no Electron, no browser needed.
+      official man pages, documentation, the local ports tree, and package
+      metadata. It runs entirely in your terminal and ships as a statically
+      linked, ~3MB binary &mdash; no dependencies, no Node.js, no Electron,
+      no browser needed.
     </p>
     <p class="subtitle">
       Ask questions in plain English. Robert searches man pages, the
-      filesystem, and ports metadata, then answers with cited excerpts from
+      filesystem, ports, and packages, then answers with cited excerpts from
       official docs &mdash; not its training data.
     </p>
     <a class="install" href="https://github.com/llmrb/robert/releases/latest">
@@ -145,6 +146,14 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
         <div class="tool-name">read-port</div>
         <div class="tool-desc">Read a port's Makefile, pkg-descr, and distinfo.</div>
       </div>
+      <div class="tool-card">
+        <div class="tool-name">find-package</div>
+        <div class="tool-desc">Search the pkg(8) database for package origins.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">read-package</div>
+        <div class="tool-desc">Read exact package metadata from the pkg(8) database.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -168,6 +177,10 @@ description: Robert is a FreeBSD AI assistant you can download as a standalone 3
       <div class="feature">
         <h3>Ports tree lookup</h3>
         <p>Robert can search and read a local FreeBSD ports tree, using <code>PORTSDIR</code> when set and <code>/usr/ports</code> otherwise.</p>
+      </div>
+      <div class="feature">
+        <h3>Package database lookup</h3>
+        <p>Robert can search and read package metadata from the local <code>pkg(8)</code> database.</p>
       </div>
     </div>
   </div>
