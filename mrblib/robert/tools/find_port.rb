@@ -18,6 +18,7 @@ module Robert::Tools
         .new("find")
         .argv(ENV["PORTSDIR"] || "/usr/ports")
         .argv("-type", "d")
+        .argv("-mindepth", "2")
         .argv("-maxdepth", "2")
         .argv("-name", name)
     end
