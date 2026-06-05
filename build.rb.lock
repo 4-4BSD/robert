@@ -2,7 +2,7 @@
 mruby:
   version: 4.0.0
   release_no: 40000
-  git_commit: b0e7118e721a73f3e93d3a58c76750f056df74e8
+  git_commit: 735b94535cd1b52bd215e78a243f94f86b5c708f
 builds:
   robert:
     https://github.com/mrbgemz/mruby-tui:
@@ -22,9 +22,9 @@ builds:
       version: 0.1.0
     https://github.com/llmrb/mruby-llm:
       url: https://github.com/llmrb/mruby-llm
-      branch: v0.1.0.beta.11
-      commit: dfccad8b882f4e73bd675e3af214341ea4cdd62e
-      version: 0.1.0.beta.11
+      branch: v0.1.0.beta.12
+      commit: 1cc090de69abf98123d29f76778ad01fc2d469c3
+      version: 0.1.0.beta.12
     https://github.com/0x1eef/mruby-process.git:
       url: https://github.com/0x1eef/mruby-process.git
       branch: v0.2.0
