@@ -22,14 +22,17 @@ module Robert::Widgets
     # @param [Symbol] strategy
     # @return [LLM::Function::Return]
     def confirm(strategy)
+      ok = false
       ui.stream.task_queue.push ["confirmation", self]
       if @queue.pop == :allow
+        confirmed!
+        ok = true
         tool.spawn(strategy).wait
       else
         tool.cancel(reason: "user denied tool execution")
       end
     ensure
-      ui.stream.task_queue.push ["confirmation_done", nil]
+      confirmed! unless ok
     end
 
     ##
@@ -77,6 +80,10 @@ module Robert::Widgets
       return if @resolved
       @resolved = true
       @queue.push(decision)
+    end
+
+    def confirmed!
+      ui.stream.task_queue.push ["confirmation_done", nil]
     end
   end
 end

@@ -115,7 +115,7 @@ module Robert
         when "error"
           err = data
           ui.status.left = "Error"
-          ui.chat.replace_last(:assistant, "#{err.class}: #{err.message}")
+          ui.chat.replace_last(:assistant, "#{err.class}: #{err.message} #{err.backtrace.join("\n")}")
           follow!
         end
       end

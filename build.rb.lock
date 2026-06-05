@@ -22,14 +22,19 @@ builds:
       version: 0.1.0
     https://github.com/llmrb/mruby-llm:
       url: https://github.com/llmrb/mruby-llm
-      branch: v0.1.0.beta.10
-      commit: 6e3a8b1f75303fb8c1b6bf489b38ded5922a5b0e
-      version: 0.1.0.beta.10
+      branch: v0.1.0.beta.11
+      commit: dfccad8b882f4e73bd675e3af214341ea4cdd62e
+      version: 0.1.0.beta.11
+    https://github.com/0x1eef/mruby-process.git:
+      url: https://github.com/0x1eef/mruby-process.git
+      branch: v0.2.0
+      commit: 2ae99772edf6a8f07a709f62507cc4752021c879
+      version: 0.2.0
     https://github.com/0x1eef/mruby-command:
       url: https://github.com/0x1eef/mruby-command
-      branch: v0.1.0
-      commit: 57ac58c24ff26fdf7b4d21a6ce5c502929ec3371
-      version: 0.1.0
+      branch: v0.2.0.beta.2
+      commit: 2966b73f74ec0305b1192bf6523cf26db8faefb9
+      version: 0.2.0.beta.2
     https://github.com/0x1eef/mruby-termbox2.git:
       url: https://github.com/0x1eef/mruby-termbox2.git
       branch: v0.3.1
@@ -55,11 +60,11 @@ builds:
       branch: master
       commit: 32acb9ea9ad1aa1db8088625252988e98770188a
       version: 0.0.0
-    https://github.com/0x1eef/mruby-process.git:
-      url: https://github.com/0x1eef/mruby-process.git
-      branch: main
-      commit: 5b51c4a11abc1444f89a61302fc8b7d0a8ab77df
-      version: 0.1.0
+    https://github.com/0x1eef/mruby-chan.git:
+      url: https://github.com/0x1eef/mruby-chan.git
+      branch: v0.3.0
+      commit: f0fcbe444ef0627ac054ddb7a177cad772c3a747
+      version: 0.3.0
     https://github.com/0x1eef/mruby-minitest.git:
       url: https://github.com/0x1eef/mruby-minitest.git
       branch: main
