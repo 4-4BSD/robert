@@ -45,6 +45,10 @@ export DEEPSEEK_SECRET="sk-..."
 
 ## Appearance
 
+**FreeBSD art** - lightweight but rich console
+
+![robert4.png](robert4.png)
+
 **Boot** - shows a random FreeBSD tip, like `${HOME}/.profile` does.
 
 ![robert1.png](robert1.png)
