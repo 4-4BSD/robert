@@ -97,23 +97,28 @@ architecture is designed for a single-purpose terminal app:
 
   The LLM call runs in a worker task while the event loop keeps the
   UI responsive.
+
 - **Streaming TUI**
 
   Tokens arrive from the API and render incrementally in the chat
   widget, with live tool-call status.
+
 - **Roff sanitisation**
 
   Raw man output often includes overstrike sequences (`_\b/` for
   underlined `/`) or underscore-wrapped paths like `_/dev_`. Those are
   stripped before they reach the model, preventing garbled paths.
+
 - **Ports tree lookup**
 
   Robert can search and read a local FreeBSD ports tree. It uses
   `${PORTSDIR}` when set, otherwise `/usr/ports`.
+
 - **Package database lookup**
 
   Robert can search and read package metadata from the local `pkg(8)`
   database.
+
 - **Grounded answers**
 
   The system prompt explicitly forbids using training data. Every
