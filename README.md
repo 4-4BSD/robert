@@ -64,7 +64,7 @@ export DEEPSEEK_SECRET="sk-..."
 **Tool confirmation** - reading and searching man pages and ports is
 automatic. Reading files and filesystem searches require confirmation.
 
-![robert4.png](robert4.png)
+![robert4.png](robert5.png)
 
 ## Tools
 
