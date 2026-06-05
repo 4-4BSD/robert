@@ -31,11 +31,11 @@ port metadata from it. This requires a local copy of the
 ports tree to be installed, which might not always be the
 case.
 
-**package-search**
+**read-package**
 
-You can search for a FreeBSD package through the package-search
-tool. The tool uses pkg-search(8), which searches a local SQLite3
-database that contains FreeBSD's package catalogue.
+You can read package metadata from the pkg(8) database through
+this tool. The package is read from a SQLite3 database that
+contains the entire FreeBSD package catalogue.
 
 ## Requirements
 
