@@ -9,7 +9,7 @@ module Robert
   class Agent < LLM::Agent
     instructions Robert.prompt
     tools { Robert.tools }
-    confirm "read-file", "grep", "find"
+    confirm :tools
 
     attr_accessor :ui
 
@@ -20,6 +20,14 @@ module Robert
     def on_tool_confirmation(tool, strategy)
       raise "Agent UI is not configured" unless ui
       Widgets::Confirmation.new(ui, tool).confirm(strategy)
+    end
+
+    private
+
+    ##
+    # @return [Array<String>]
+    def tools
+      Robert.disable_confirmations? ? [] : ["read-file", "grep", "find"]
     end
   end
 end

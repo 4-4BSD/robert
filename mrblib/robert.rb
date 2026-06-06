@@ -9,6 +9,21 @@ module Robert
   end
 
   ##
+  # Configure Robert to not ask for tool confirmation
+  # @return [void]
+  def self.disable_confirmations!
+    @disable_confirmations = true
+  end
+
+  ##
+  # Returns false when Robert asks for tool confirmation
+  # @return [Boolean]
+  def self.disable_confirmations?
+    !!@disable_confirmations
+  end
+  @disable_confirmations = false
+
+  ##
   # @return [Array<LLM::Tool>]
   def self.tools
     [
