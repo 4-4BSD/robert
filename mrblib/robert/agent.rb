@@ -13,12 +13,17 @@ module Robert
 
     attr_accessor :ui
 
+    ##
+    # @return [Task::Queue]
     def queue
       stream.task_queue
     end
 
+    ##
+    # @param [LLM::Function] tool
+    # @param [Symbol] strategy
+    # @return [LLM::Function::Return]
     def on_tool_confirmation(tool, strategy)
-      raise "Agent UI is not configured" unless ui
       Widgets::Confirmation.new(ui, tool).confirm(strategy)
     end
 
@@ -27,7 +32,13 @@ module Robert
     ##
     # @return [Array<String>]
     def tools
-      Robert.disable_confirmations? ? [] : ["read-file", "grep", "find"]
+      Robert.disable_confirmations? ? [] : filesystem_tools
+    end
+
+    ##
+    # @return [Array<String>]
+    def filesystem_tools
+      ["read-file", "grep", "find"]
     end
   end
 end
