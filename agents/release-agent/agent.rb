@@ -101,12 +101,7 @@ end
 # main
 
 llm = LLM.deepseek(key: ENV["DEEPSEEK_SECRET"])
-agent = LLM::Agent.new(
-  llm,
-  stream: Stream.new,
-  skills: [File.join(Dir.pwd, "skills", "release-agent")],
-  #tracer: LLM::Tracer::Logger.new(io: $stdout)
-)
+agent = LLM::Agent.new(llm, stream: Stream.new, skills: [__dir__])
 
 print "Enter version: "
 ver = $stdin.gets.chomp
