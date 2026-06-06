@@ -2,6 +2,37 @@
 
 ## Unreleased
 
+## v0.11.0.beta.3
+
+Changes since `v0.11.0.beta.2`.
+
+This release adds a `-x` flag to run tools without user confirmation,
+reworks the project copy to describe Robert as a FreeBSD teacher
+throughout the README, man page, and project site, bumps mruby-llm
+to v0.1.0.beta.14, and updates mruby.
+
+### Add
+
+* **Add `-x` confirmation bypass flag** <br>
+  Add a `-x` option that allows tools to run without requiring
+  user confirmation.
+
+### Changed
+
+* **Update project copy** <br>
+  Reword the README, project site, and man page to describe Robert
+  as a FreeBSD teacher rather than an AI assistant, and use "He"
+  consistently throughout.
+
+* **Update build dependencies** <br>
+  Bump mruby-llm to v0.1.0.beta.14 and update mruby.
+
+### Docs
+
+* **Fix README formatting** <br>
+  Add missing blank lines between list items in the How it works
+  section.
+
 ## v0.11.0.beta.2
 
 Changes since `v0.11.0.beta.1`.

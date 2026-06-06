@@ -100,8 +100,9 @@ end
 ##
 # main
 
+dir = File.dirname(__FILE__)
 llm = LLM.deepseek(key: ENV["DEEPSEEK_SECRET"])
-agent = LLM::Agent.new(llm, stream: Stream.new, skills: [__dir__])
+agent = LLM::Agent.new(llm, stream: Stream.new, skills: [dir])
 
 print "Enter version: "
 ver = $stdin.gets.chomp
