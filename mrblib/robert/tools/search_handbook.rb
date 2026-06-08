@@ -15,7 +15,7 @@ module Robert::Tools
     private
 
     def endpoint
-      "https://4.4bsd.dev/search"
+      "https://4.4bsd.dev/handbook/u/search"
     end
   end
 end
