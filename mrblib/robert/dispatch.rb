@@ -237,7 +237,7 @@ module Robert
     def tool_running_label(fn)
       case fn.name
       when "search-handbook"
-        "• Search FreeBSD's handbook: #{fn.arguments.keyword}"
+        "• Search FreeBSD's handbook: #{fn.arguments.q}"
       when "version"
         "• Discovering Robert's version"
       when "read-package"
