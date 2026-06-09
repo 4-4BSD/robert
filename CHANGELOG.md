@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+## v0.11.0
+
+Changes since `v0.11.0.beta.4`.
+
+This release marks the stable v0.11.0 release, adding paste support
+by batching terminal events and deferring redraws, and updating
+documentation across the README and man page.
+
+### Add
+
+* **Add paste support** <br>
+  Batch terminal events and defer redraws so pasted input prints
+  almost instantly instead of one character at a time.
+
+### Docs
+
+* **Update README and man page** <br>
+  Refresh the README and man page to describe the individual handbook
+  tools (`search-user-handbook`, `search-developer-handbook`,
+  `search-porter-handbook`), document the `-x` flag in the man page,
+  and update descriptive copy throughout.
+
 ## v0.11.0.beta.4
 
 Changes since `v0.11.0.beta.3`.
