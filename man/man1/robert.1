@@ -17,23 +17,33 @@
 .Os
 .Sh NAME
 .Nm robert
-.Nd FreeBSD teacher for the terminal
+.Nd learn and troubleshoot FreeBSD from the terminal
 .Sh SYNOPSIS
 .Nm
-.Op Fl dhv
+.Op Fl dxhv
 .Sh DESCRIPTION
 .Nm
-is designed to teach you about FreeBSD by answering
-questions from official manual pages and documentation.
-He runs in the terminal and is distributed as a standalone, 3MB binary
-with no Node.js, Electron, or browser dependency.
+is designed to help you learn and troubleshoot FreeBSD using official
+documentation, manual pages, source code, ports, and packages.
+It explains what to do and why, while leaving system changes in your
+hands.
+.Nm
+runs in the terminal and is distributed as a standalone, 3MB binary
+with no Node.js, Electron, browser, Ruby installation, or gem bundle
+dependency.
 .Pp
 Robert uses
 .Ev DEEPSEEK_SECRET
 to authenticate with the model provider, and answers questions by
-searching man pages, the filesystem, and ports metadata.
+searching manual pages, the FreeBSD handbooks, the filesystem, ports
+metadata, and package metadata.
 Answers are grounded in cited excerpts from official documentation, not
 model training data.
+.Pp
+.Nm
+is read-only by design: it can inspect documentation, ports, packages,
+source code, and approved files, but it does not write data or automate
+system changes.
 .Pp
 The options are as follows:
 .Bl -tag -width indent
@@ -73,13 +83,19 @@ The default ports tree used by
 to search for and read port metadata.
 .El
 .Sh TOOLS
-The following tools are available to the assistant:
-.Bl -tag -width "find-port"
+The following tools are available:
+.Bl -tag -width "search-developer-handbook"
 .It Ic man-page
 Read a manual page by name and optional section.
 .It Ic man-search
 Search the manual page database using
 .Xr apropos 1 .
+.It Ic search-user-handbook
+Search the FreeBSD user's handbook with full-text search.
+.It Ic search-developer-handbook
+Search the FreeBSD developer's handbook with full-text search.
+.It Ic search-porter-handbook
+Search the FreeBSD porter's handbook with full-text search.
 .It Ic read-file
 Read a text file from the filesystem.
 This tool requires confirmation before execution.
@@ -97,6 +113,14 @@ Read a port's
 .Pa pkg-descr ,
 and
 .Pa distinfo .
+.It Ic read-package
+Read exact package metadata from the
+.Xr pkg 8
+database.
+.It Ic find-package
+Search the
+.Xr pkg 8
+database for package origins.
 .It Ic version
 Report the
 .Nm

@@ -67,16 +67,19 @@ confirmation.
 ## Tools
 
 Robert chains these tools autonomously: it searches man pages, the
-FreeBSD Handbook, the filesystem, the local ports tree, and the package
-database; reads files, port metadata, and package metadata; and
-synthesises answers without hand-holding. It only pauses for
-confirmation when reading files or searching the filesystem.
+FreeBSD user, developer, and porter handbooks, the filesystem, the
+local ports tree, and the package database; reads files, port metadata,
+and package metadata; and synthesises answers without hand-holding. It
+only pauses for confirmation when reading files or searching the
+filesystem.
 
 | Tool | Description | Confirmation |
 |------|-------------|--------------|
 | `man-page` | Returns the contents of a man page (optionally by section) | No |
 | `man-search` | Searches manual pages for keywords via `apropos` | No |
-| `search-handbook` | Searches the FreeBSD Handbook with full-text search | No |
+| `search-user-handbook` | Searches the FreeBSD user's handbook with full-text search | No |
+| `search-developer-handbook` | Searches the FreeBSD developer's handbook with full-text search | No |
+| `search-porter-handbook` | Searches the FreeBSD porter's handbook with full-text search | No |
 | `read-file` | Reads a file from the filesystem | Yes |
 | `find` | Searches for files and directories from a root path | Yes |
 | `grep` | Searches for text across files below a root path | Yes |
@@ -110,8 +113,9 @@ architecture is designed for a single-purpose terminal app:
 
 - **Handbook search**
 
-  Robert can search the FreeBSD Handbook with full-text search, then
-  use matching Handbook results alongside manual pages.
+  Robert can search the FreeBSD user, developer, and porter handbooks
+  with full-text search, then use matching Handbook results alongside
+  manual pages.
 
 - **Ports tree lookup**
 
