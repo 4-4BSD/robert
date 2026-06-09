@@ -18,8 +18,9 @@ pages, the Handbook with full-text search, the filesystem, ports, and
 packages, then answers with **cited excerpts** from official docs. He
 runs on DeepSeek and costs pennies to use.
 
-[The website](https://llmrb.github.io/robert) has a full
-screencast and more screenshots.
+**See also:**
+
+* [4.4bsd.dev/robert](https://4.4bsd.dev/robert)
 
 ## Quick start
 
