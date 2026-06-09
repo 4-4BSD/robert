@@ -19,6 +19,30 @@ module Robert
       @labels = []
       @scroll_delta = 0
       @last_idle_refresh = Time.now.to_f
+      @defer_redraw = false
+      @needs_redraw = false
+    end
+
+    ##
+    # Process a burst of terminal events and repaint once.
+    #
+    # Pasted input can arrive as hundreds of printable key events already
+    # queued by the terminal. Running the normal key path for each event keeps
+    # editing semantics intact, but deferring repaint avoids one full redraw per
+    # pasted character.
+    #
+    # @param [Array<Termbox2::Event<Robert::Event>>] events
+    # @return [void]
+    def on_peek(events)
+      return if events.empty?
+      @defer_redraw = true
+      events.each { on_event(_1) }
+    ensure
+      @defer_redraw = false
+      if @needs_redraw
+        @needs_redraw = false
+        TUI.draw(ui.root)
+      end
     end
 
     ##
@@ -198,7 +222,7 @@ module Robert
       ui.status.left = "Thinking..."
       ui.status.right = Tree::CANCEL_HINT
       @task = Task.new(name: "agent") { talk.(msg, _agent, _ui) }
-      TUI.draw(ui.root)
+      redraw!
     end
 
     ##
@@ -282,6 +306,10 @@ module Robert
     # Redraw the current UI tree.
     # @return [void]
     def redraw!
+      if @defer_redraw
+        @needs_redraw = true
+        return
+      end
       TUI.draw(ui.root)
     end
 
