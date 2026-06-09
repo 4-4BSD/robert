@@ -8,7 +8,11 @@ module Robert::Tools
     required %i[path]
 
     def call(path:)
-      {content: Robert.sanitize(File.read(path))}
+      if Robert.binary?(path)
+        raise Robert::Error, "robert cannot read binary files"
+      else
+        {content: Robert.sanitize(File.read(path))}
+      end
     end
   end
 end

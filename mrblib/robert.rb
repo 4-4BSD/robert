@@ -106,4 +106,12 @@ module Robert
   rescue Termbox2::Error
     nil
   end
+
+  ##
+  # Returns true when the file is a binary
+  # @return [Boolean]
+  def self.binary?(path)
+    cmd = Command.new("file", "-i", path)
+    cmd.stdout.include?("charset=binary")
+  end
 end

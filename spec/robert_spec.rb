@@ -15,6 +15,24 @@ describe "Robert" do
       expect(Robert.sanitize(payload)).must_equal({content: ["ab", {path: "/tmp/x"}]})
     end
   end
+
+  describe ".binary?" do
+    subject { Robert.binary?(path) }
+
+    context "when given a binary file" do
+      let(:path) { "/bin/ls" }
+      it "returns true" do
+        expect(subject).must_equal(true)
+      end
+    end
+
+    context "when given a text file" do
+      let(:path) { "./README.md" }
+      it "returns false" do
+        expect(subject).must_equal(false)
+      end
+    end
+  end
 end
 
 Minitest.run(ARGV) || exit(1)
