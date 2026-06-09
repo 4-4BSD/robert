@@ -35,7 +35,9 @@ module Robert
       Tools::ReadPort,
       Tools::ReadPackage,
       Tools::FindPackage,
-      Tools::SearchHandbook,
+      Tools::SearchUsersHandbook,
+      Tools::SearchDevelopersHandbook,
+      Tools::SearchPortersHandbook,
       Tools::Grep,
       Tools::Version
     ]

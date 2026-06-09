@@ -36,10 +36,20 @@ a tool call that invokes apropos(1).
 You can read the official FreeBSD manual pages through a
 tool call that invokes man(1).
 
-**search-handbook**
+**search-user-handbook**
 
-You can search the official FreeBSD handbook when it helps
-you solve the user's question or troubleshoot their problem.
+You can search the FreeBSD user handbook with full-text
+when it is relevant to the user's question.
+
+**search-developer-handbook**
+
+You can search the FreeBSD developer handbook with full-text
+when it is relevant to the user's question.
+
+**search-porter-handbook**
+
+You can search the FreeBSD porter handbook with full-text
+when it is relevant to the user's question.
 
 **find**
 
