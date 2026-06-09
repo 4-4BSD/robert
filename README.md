@@ -24,7 +24,7 @@ runs on DeepSeek and costs pennies to use.
 **1. Download the latest release**
 
 ```sh
-fetch https://github.com/llmrb/robert/releases/download/v0.11.0.beta.3/robert
+fetch https://github.com/llmrb/robert/releases/download/v0.11.0.beta.4/robert
 chmod +x robert
 ```
 
@@ -139,7 +139,7 @@ statically. The result is a self-contained 3MB binary.
 Pre-built static binaries for FreeBSD 15-STABLE and 16-CURRENT can
 be [downloaded from GitHub Releases](https://github.com/llmrb/robert/releases).
 Each tagged release publishes a `robert` binary; the latest pre-release
-is [v0.11.0.beta.3](https://github.com/llmrb/robert/releases/tag/v0.11.0.beta.3).
+is [v0.11.0.beta.4](https://github.com/llmrb/robert/releases/tag/v0.11.0.beta.4).
 
 ## Build from source
 

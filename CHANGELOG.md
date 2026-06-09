@@ -2,6 +2,58 @@
 
 ## Unreleased
 
+## v0.11.0.beta.4
+
+Changes since `v0.11.0.beta.3`.
+
+This release adds handbook full-text search tools for the user,
+developer, and porter handbooks through a metaprogramming module,
+adds a binary file guard to `read-file`, restructures the system
+prompt with capability descriptions and source reference
+instructions, adds a project logo, and bumps mruby-llm to
+v0.1.0.beta.16.
+
+### Add
+
+* **Add handbook full-text search tools** <br>
+  Add `search-user-handbook`, `search-developer-handbook`, and
+  `search-porter-handbook` tools that search the FreeBSD handbooks
+  with full-text search via `4.4bsd.dev`. Introduce
+  `Robert::Handbook`, a metaprogramming module that creates a
+  `LLM::Tool` subclass for each handbook.
+
+* **Add binary file guard to `read-file`** <br>
+  Add `Robert.binary?` and raise an error when `read-file` is asked
+  to read a binary file.
+
+* **Add source reference instructions** <br>
+  Instruct the model to list sources used to generate a response and
+  reference the source when citing documentation.
+
+### Changed
+
+* **Restructure system prompt** <br>
+  Reword the objective to emphasise teaching FreeBSD rather than
+  troubleshooting, add explicit capability descriptions for each
+  tool, and add a greeting instruction.
+
+* **Update build dependencies** <br>
+  Bump mruby-llm to v0.1.0.beta.16.
+
+### Docs
+
+* **Document handbook full-text search** <br>
+  Update the README and docs site to describe Handbook search
+  support, add `search-handbook` to the tool table, and update
+  descriptive copy throughout.
+
+* **Add project logo** <br>
+  Add `robert.png` and use it in the README header in place of the
+  previous image.
+
+* **Fix link** <br>
+  Replace the website link with a link to `4.4bsd.dev/robert`.
+
 ## v0.11.0.beta.3
 
 Changes since `v0.11.0.beta.2`.
