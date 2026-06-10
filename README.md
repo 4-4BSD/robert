@@ -40,30 +40,6 @@ export DEEPSEEK_SECRET="sk-..."
 ./robert
 ```
 
-## Appearance
-
-**FreeBSD art** - lightweight but rich console
-
-![robert4.png](robert4.png)
-
-**Boot** - shows a random FreeBSD tip, like `${HOME}/.profile` does.
-
-![robert1.png](robert1.png)
-
-**First turn** - simple greeting.
-
-![robert2.png](robert2.png)
-
-**Second turn** - question answered from official FreeBSD docs.
-
-![robert3.png](robert3.png)
-
-**Tool confirmation** - reading and searching man pages, the Handbook,
-and ports is automatic. Reading files and filesystem searches require
-confirmation.
-
-![robert4.png](robert5.png)
-
 ## Tools
 
 Robert chains these tools autonomously: it searches man pages, the
