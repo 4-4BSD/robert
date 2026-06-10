@@ -296,12 +296,8 @@ module Robert
     # @param [LLM::Function] fn
     # @return [String]
     def tool_running_label(fn)
-      regexp = /^search-([a-zA-Z]+)-handbook$/
       case fn.name
-      when regexp
-        ##
-        # Workaround for https://github.com/mruby/mruby/issues/6883
-        regexp =~ fn.name
+      when /^search-([a-zA-Z]+)-handbook$/
         "• Search the FreeBSD #{$1} handbook: #{fn.arguments.q}"
       when "version"
         "• Discovering Robert's version"
