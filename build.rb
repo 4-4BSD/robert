@@ -26,8 +26,8 @@ MRuby::Build.new("robert") do |conf|
   #conf.gem File.realpath File.join(__dir__, "..", "..", "mrbgemz", "mruby-tui")
   conf.gem git: "https://github.com/mrbgemz/mruby-tui"      , branch: "v0.4.1"
 
-  #conf.gem File.realpath File.join(__dir__, "..", "..", "mrbgemz", "mruby-tui-chat")
-  conf.gem git: "https://github.com/mrbgemz/mruby-tui-chat" , branch: "v0.3.1.beta.1"
+  #conf.gem File.realpath File.join(__dir__, "..", "mruby-tui-chat")
+  conf.gem git: "https://github.com/mrbgemz/mruby-tui-chat" , branch: "v0.3.1.beta.2"
 
   #conf.gem File.realpath File.join(__dir__, "..", "..", "mrbgemz", "mruby-markdown")
   conf.gem git: "https://github.com/mrbgemz/mruby-markdown" , branch: "main"

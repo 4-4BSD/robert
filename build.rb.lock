@@ -12,9 +12,9 @@ builds:
       version: 0.4.1
     https://github.com/mrbgemz/mruby-tui-chat:
       url: https://github.com/mrbgemz/mruby-tui-chat
-      branch: v0.3.1.beta.1
-      commit: 49ea7c2c35d2bf71089fc5ff54da6cc81fc59361
-      version: 0.3.1.beta.1
+      branch: v0.3.1.beta.2
+      commit: e1a91447978178b7426cd2d7b15e7a83f9d7d75e
+      version: 0.3.1.beta.2
     https://github.com/mrbgemz/mruby-markdown:
       url: https://github.com/mrbgemz/mruby-markdown
       branch: main

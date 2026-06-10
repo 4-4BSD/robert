@@ -124,13 +124,12 @@ module Robert
           @changed = true
         when "tool_call"
           @labels << tool_running_label(data)
-          ui.chat.replace_last(:assistant, assistant_text)
-          follow!
+          ui.chat.replace_last(:assistant, assistant_text, follow: true)
           @changed = false
           @last_render = Time.now.to_f
           requires_redraw = true
         when "tool_return"
-          follow!
+          nil
         when "confirmation"
           @confirmation = data
           ui.status.left = data.prompt
@@ -156,7 +155,6 @@ module Robert
           err = data
           ui.status.left = "Error"
           ui.chat.replace_last(:assistant, "#{err.class}: #{err.message} #{err.backtrace.join("\n")}")
-          follow!
           requires_redraw = true
         end
       end
@@ -215,7 +213,6 @@ module Robert
       now = Time.now.to_f
       return false if !force && (now - @last_render) < (1.0 / FPS)
       ui.chat.replace_last(:assistant, assistant_text)
-      follow!
       @changed = false
       @last_render = now
       true
