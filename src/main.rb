@@ -47,7 +47,7 @@ def main(argv)
   agent.ui  = ui
   dispatch  = Robert::Dispatch.new(LLM::Object.from(llm:, agent:, ui: agent.ui))
 
-  Task.new(name: "event-loop") do
+  task = Task.new(name: "event-loop") do
     TUI.run(ui.root) do
       Robert.set_theme
       begin
@@ -67,6 +67,7 @@ def main(argv)
     crash(err)
   end
   Task.run
+  Exception === task.value ? crash(task.value) : nil
 end
 
 def tick(dispatch, ui)
