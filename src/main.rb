@@ -78,7 +78,7 @@ def tick(dispatch, ui)
   dispatch.on_peek peek_ahead(event) if event
   dispatch.tick(ui)
   dispatch.refresh
-  Task.pass
+  sleep_ms 1
 end
 
 def peek_ahead(event)
