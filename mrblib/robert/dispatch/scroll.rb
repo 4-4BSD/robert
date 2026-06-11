@@ -93,5 +93,13 @@ class Robert::Dispatch
       return false unless @last_scroll_event
       Time.now.to_f - @last_scroll_event < 0.12
     end
+
+    ##
+    # Returns true while delayed scroll-key fragments
+    # are still likely to arrive.
+    # @return [Boolean]
+    def recent_scroll?
+      ((@last_scroll_event and Time.now.to_f) - @last_scroll_event) < 1.0
+    end
   end
 end

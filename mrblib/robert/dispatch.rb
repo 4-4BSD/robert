@@ -29,6 +29,7 @@ module Robert
       @needs_redraw = false
       @changed = false
       @last_render = 0.0
+      @streaming = false
     end
 
     ##
@@ -68,8 +69,9 @@ module Robert
         ui.status.right = Tree::HINTS
         redraw!
       elsif event.key?(:CTRL_D) and not exitable?
-        Robert.debug "Ignoring Ctrl+D while Robert is busy or input is not empty."
+        Robert.debug "Ignoring Ctrl+D while Robert is active or handling recent scroll input."
       elsif event.key?(:CTRL_D)
+        Robert.debug "Exiting on Ctrl+D event type=#{event.type} key=#{event.key} ch=#{event.ch} mod=#{event.mod}."
         throw(:breakout)
       elsif event.key?(:ENTER) && elapsed < 0.05
         ui.input.put("\n")
@@ -144,15 +146,18 @@ module Robert
           requires_redraw = true
         when "done"
           requires_redraw = flush(ui, true) || requires_redraw
+          @streaming = false
           ui.status.left = "Idle"
           ui.status.right = Tree::HINTS
           requires_redraw = true
         when "cancel"
           requires_redraw = flush(ui, true) || requires_redraw
+          @streaming = false
           ui.status.left = "Cancelled"
           ui.status.right = Tree::HINTS
           requires_redraw = true
         when "error"
+          @streaming = false
           @changed = false
           err = data
           ui.status.left = "Error"
@@ -258,6 +263,7 @@ module Robert
       ui.chat.add(:user, msg)
       ui.chat.add(:assistant, "")
       follow!
+      @streaming = true
       ui.status.left = "Thinking..."
       ui.status.right = Tree::CANCEL_HINT
       @task = Task.new(name: "agent") { talk.(msg, _agent, _ui) }
@@ -359,7 +365,7 @@ module Robert
     # Returns true when Ctrl+D should exit the application.
     # @return [Boolean]
     def exitable?
-      !task and !ui.busy and ui.input.empty?
+      !@streaming and !task and !ui.busy and ui.input.empty? and !recent_scroll?
     end
 
     ##
