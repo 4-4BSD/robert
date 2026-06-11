@@ -62,7 +62,11 @@ def main(argv)
     end
   end
 rescue => err
-  Robert.debug "Robert has crashed"
+  Robert.debug [
+    "Robert has crashed: ",
+    "#{err.class}: #{err.message}",
+    err.backtrace.join("\n")
+  ].join("\n")
   crash(err)
 end
 
