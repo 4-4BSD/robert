@@ -72,7 +72,7 @@ module Robert
         Robert.debug "Ignoring Ctrl+D while Robert is active or handling recent scroll input."
       elsif event.key?(:CTRL_D)
         Robert.debug "Exiting on Ctrl+D event type=#{event.type} key=#{event.key} ch=#{event.ch} mod=#{event.mod}."
-        throw(:breakout)
+        throw(:breakout, :ctrl_d)
       elsif event.key?(:ENTER) && elapsed < 0.05
         ui.input.put("\n")
         redraw!

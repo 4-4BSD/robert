@@ -52,10 +52,8 @@ def main(argv)
       Robert.set_theme
       begin
         TUI.draw(ui.root)
-        catch(:breakout) do
-          loop { tick(dispatch, ui) }
-        end
-        Robert.debug "Robert has exited"
+        reason = catch(:breakout) { loop { tick(dispatch, ui) } }
+        Robert.debug "Robert has exited: '#{reason}'"
       ensure
         Robert.unset_theme
       end
