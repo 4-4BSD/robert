@@ -66,8 +66,11 @@ def main(argv)
     Robert.debug "Robert has crashed"
     crash(err)
   end
-  Task.run
-  Exception === task.value ? crash(task.value) : nil
+  result, value, status = Task.run, task.value, task.status
+  Robert.debug "Task.run returned #{result.inspect}; " \
+               "event-loop status=#{status.inspect}; " \
+               "value=#{value.class}: #{value.inspect}"
+  crash(value) if Exception === value
 end
 
 def tick(dispatch, ui)
