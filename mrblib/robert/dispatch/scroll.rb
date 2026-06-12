@@ -15,6 +15,15 @@ class Robert::Dispatch
   # scroll movement before the next response starts streaming.
   module Scroll
     ##
+    # Maximum arrow-key rows applied in a single event-loop tick.
+    #
+    # A value of 1 avoids stale key-repeat backlog but feels slow over high
+    # latency links. Keep this small so held up/down keys can move smoothly
+    # without letting a delayed terminal burst continue scrolling long after
+    # the key is released.
+    SCROLL_MAX = 4
+
+    ##
     # Queue scroll movement so repeated arrow-key events are coalesced.
     # @param [Integer] delta
     # @return [void]
@@ -22,7 +31,9 @@ class Robert::Dispatch
       before = @scroll_delta
       @last_scroll_event = Time.now.to_f
       @scroll_delta += delta
-      @scroll_delta = [[@scroll_delta, -1].max, 1].min
+      if @scroll_delta.abs <= SCROLL_MAX + 1
+        @scroll_delta = [[@scroll_delta, -SCROLL_MAX].max, SCROLL_MAX].min
+      end
       debug_scroll("Queued scroll movement #{delta}. Pending scroll changed from #{before} to #{@scroll_delta}.")
     end
 
