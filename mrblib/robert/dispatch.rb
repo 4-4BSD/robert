@@ -116,7 +116,11 @@ module Robert
     # @return [void]
     def tick(ui)
       requires_redraw = false
-      requires_redraw = apply_scroll if @scroll_delta != 0
+      scroll_redraw = false
+      if @scroll_delta != 0
+        apply_scroll
+        scroll_redraw = true
+      end
       events = 0
       while event = pop
         events += 1
@@ -173,6 +177,8 @@ module Robert
       if requires_redraw
         Robert.debug "Redrawing UI after processing #{events} assistant stream events."
         TUI.draw(ui.root)
+      elsif scroll_redraw
+        redraw_chat!
       end
     end
 
@@ -352,6 +358,22 @@ module Robert
         return
       end
       TUI.draw(ui.root)
+    end
+
+    ##
+    # Redraw only the chat viewport after a scroll movement.
+    #
+    # The chat widget already keeps wrapped rows cached locally; scrolling only
+    # changes the viewport offset. A full root redraw clears and repaints the
+    # status/input chrome as well, which costs extra terminal output over SSH
+    # and makes arrow-key scrolling feel laggy. Rendering just chat keeps the
+    # existing terminal back buffer for the rest of the UI and flushes only the
+    # viewport diff.
+    #
+    # @return [void]
+    def redraw_chat!
+      ui.chat.render
+      TUI.present
     end
 
     ##
