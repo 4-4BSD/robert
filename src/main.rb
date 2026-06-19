@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# Event loop latency/CPU balance.
-#
-# Higher = fewer wakeups and less SSH/terminal churn
-# Lower  = slightly faster reaction to input and stream updates
-INPUT_POLL_MS = 20
-
-##
-# Limit one delayed terminal burst so scroll/key-repeat input cannot monopolize
-# the loop before stream output and redraw throttles get a turn.
-MAX_PEEK_EVENTS = 64
+# main
 
 def main(argv)
   while option = argv.shift
@@ -23,15 +14,7 @@ def main(argv)
     when '-x'
       Robert.disable_confirmations!
     when '-h'
-      $stderr.puts <<~USAGE
-      robert [OPTIONS]
-
-      Options:
-        -h  Show help
-        -v  Show version
-        -d  Enable debug mode
-        -x  Allow tools to run without confirmation
-      USAGE
+      help
       exit(0)
     else
       $stderr.puts "robert: bad option #{option}"
@@ -69,8 +52,11 @@ rescue => err
   crash(err)
 end
 
+##
+# utils
+
 def tick(dispatch, ui)
-  event = TUI.peek_event(INPUT_POLL_MS)
+  event = TUI.peek_event(Robert.poll_interval)
   dispatch.on_peek peek_ahead(event) if event
   Task.pass
   dispatch.tick(ui)
@@ -79,10 +65,24 @@ end
 
 def peek_ahead(event)
   events = [event]
-  while events.length < MAX_PEEK_EVENTS and (event = TUI.peek_event(0))
+  while events.length < Robert.max_events
+    event = TUI.peek_event(0)
+    break if event.nil?
     events << event
   end
   events
+end
+
+def help
+  $stderr.puts <<~USAGE
+  robert [OPTIONS]
+
+  Options:
+    -d  Enable debug mode
+    -x  Allow tools to run without confirmation
+    -v  Show version
+    -h  Show help
+  USAGE
 end
 
 def crash(err)
@@ -90,5 +90,8 @@ def crash(err)
   err.backtrace.each { puts _1 }
   exit 1
 end
+
+##
+# Let's go
 
 main(ARGV)

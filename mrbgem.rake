@@ -10,6 +10,8 @@ MRuby::Gem::Specification.new("robert") do |spec|
     mrblib/robert/version.rb
     mrblib/robert/debug.rb
     mrblib/robert.rb
+    mrblib/robert/tools.rb
+    mrblib/robert/widgets.rb
     mrblib/robert/theme.rb
     mrblib/robert/widgets/pane.rb
     mrblib/robert/widgets/splash.rb

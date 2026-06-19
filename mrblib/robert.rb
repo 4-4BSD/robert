@@ -1,11 +1,21 @@
 module Robert
   extend Debug
+
+  ##
+  # The base class of all errors
+  # @return [Error]
   Error = Class.new(RuntimeError)
 
-  module Tools
+  ##
+  # @return [Integer]
+  def self.poll_interval
+    20
   end
 
-  module Widgets
+  ##
+  # @return [Integer]
+  def self.max_events
+    64
   end
 
   ##

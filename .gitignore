@@ -2,6 +2,7 @@
 /build
 /bin
 /vendor
+/mruby
 _site/
 /*.core
 /*.log
