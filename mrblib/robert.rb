@@ -8,6 +8,12 @@ module Robert
 
   ##
   # @return [Integer]
+  def self.maxdepth
+    3
+  end
+
+  ##
+  # @return [Integer]
   def self.poll_interval
     20
   end

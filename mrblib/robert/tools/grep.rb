@@ -4,12 +4,12 @@ module Robert::Tools
     description "Grep for a string across directories and files"
     parameter :root, String, "The root directory from where to perform the search"
     parameter :string, String, "The needle in the haystack"
-    parameter :maxdepth, Integer, "The maximum depth for directory recursion (must be <= 2)", default: 1
+    parameter :maxdepth, Integer, "The maximum depth for directory recursion (must be <= #{Robert.maxdepth})", default: 1
     required %i[root string]
 
     def call(root:, string:, maxdepth: 1)
-      if maxdepth > 2
-        raise Robert::Error, "maximum maxdepth is 2"
+      if maxdepth > Robert.maxdepth
+        raise Robert::Error, "maximum maxdepth is #{Robert.maxdepth}"
       elsif string.strip.empty?
         raise Robert::Error, "string is empty"
       else
