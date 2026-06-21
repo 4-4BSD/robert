@@ -5,6 +5,10 @@
   <br>
 </p>
 
+> A [4.4BSD.dev](https://4.4bsd.dev) project
+
+Your knowledgeable FreeBSD companion.
+
 Robert is designed to teach you about FreeBSD by answering questions
 from official manual pages and the FreeBSD Handbook. He runs entirely
 in your terminal and ships as a **statically linked, ~3MB binary** -
