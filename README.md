@@ -43,13 +43,6 @@ export DEEPSEEK_SECRET="sk-..."
 
 ## Tools
 
-Robert chains these tools autonomously: it searches man pages, the
-FreeBSD user, developer, and porter handbooks, the filesystem, the
-local ports tree, and the package database; reads files, port metadata,
-and package metadata; and synthesises answers without hand-holding. It
-only pauses for confirmation when reading files or searching the
-filesystem.
-
 | Tool | Description | Confirmation |
 |------|-------------|--------------|
 | `man-page` | Returns the contents of a man page (optionally by section) | No |
