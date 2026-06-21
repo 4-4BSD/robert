@@ -9,17 +9,18 @@
 
 Your knowledgeable FreeBSD companion.
 
-Robert is designed to teach you about FreeBSD by answering questions
+Robert can help you learn and troubleshoot FreeBSD by answering questions
 from official manual pages and the FreeBSD Handbook. He runs entirely
-in your terminal and ships as a **statically linked, ~3MB binary** -
-no dependencies, no Node.js, no Electron, no browser needed.
-
-Ask questions about FreeBSD in plain English. Robert searches man
-pages, the Handbook with full-text search, the filesystem, ports, and
-packages, then answers with **cited excerpts** from official docs. He
-runs on DeepSeek and costs pennies to use.
+in your terminal and ships as a **statically linked, ~3MB binary**
+built on [mruby-llm](https://r.uby.dev/mruby-llm).
 
 ## Quick start
+
+**Accessible via SSH:**
+
+```sh
+ssh robert@4.4bsd.dev
+```
 
 **1. Download the latest release**
 
