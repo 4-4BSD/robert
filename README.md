@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://4.4bsd.dev/robert">
-    <img src="./4.4bsd.svg" width="450" border="0" alt="4.4BSD BSD Software">
+    <img src="./4.4bsd.svg" width="450" border="0" alt="Building cool stuff with BSD">
   </a>
   <br>
 </p>
