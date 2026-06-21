@@ -5,7 +5,7 @@
   <br>
 </p>
 
-> A [4.4BSD.dev](https://4.4bsd.dev) project
+> A [4.4BSD.dev](https://4.4bsd.dev/robert) project
 
 Your knowledgeable FreeBSD companion.
 
@@ -18,10 +18,6 @@ Ask questions about FreeBSD in plain English. Robert searches man
 pages, the Handbook with full-text search, the filesystem, ports, and
 packages, then answers with **cited excerpts** from official docs. He
 runs on DeepSeek and costs pennies to use.
-
-**See also:**
-
-* [4.4bsd.dev/robert](https://4.4bsd.dev/robert)
 
 ## Quick start
 
