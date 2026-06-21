@@ -65,11 +65,7 @@ filesystem.
 | `read-package` | Reads exact package metadata from the `pkg(8)` database | No |
 | `version` | Reports Robert's version number | No |
 
-## How it works
-
-Robert is built on [mruby-llm](https://github.com/llmrb/mruby-llm),
-the mruby port of [llm.rb](https://github.com/llmrb/llm.rb). The
-architecture is designed for a single-purpose terminal app:
+## Under the hood
 
 - **Cooperative task scheduler**
 
@@ -135,12 +131,6 @@ The Makefile expects an mruby checkout at `../mruby`. Override with
 `MRUBY_DIR=/path/to/mruby` if needed. Run `make static` for a
 statically linked binary (~3MB) or `make` for a dynamically linked
 one (~2MB).
-
-## Association
-
-This project belongs to the [llm.rb](https://github.com/llmrb/llm.rb#readme)
-family of projects. [mruby-llm](https://github.com/llmrb/mruby-llm)
-is a port of [llm.rb](https://github.com/llmrb/llm.rb) to mruby.
 
 ## License
 
