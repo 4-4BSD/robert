@@ -22,9 +22,9 @@ builds:
       version: 0.1.0
     https://github.com/llmrb/mruby-llm:
       url: https://github.com/llmrb/mruby-llm
-      branch: v0.1.0.beta.17
-      commit: 94ee655a4727e4dc09a331e9aa91cfc20e70e1c5
-      version: 0.1.0.beta.17
+      branch: v0.1.0.beta.18
+      commit: d55c163d9c87a12d192f1a757d6bd8d03c163750
+      version: 0.1.0.beta.18
     https://github.com/0x1eef/mruby-process.git:
       url: https://github.com/0x1eef/mruby-process.git
       branch: v0.2.0
@@ -47,9 +47,9 @@ builds:
       version: 0.0.0
     https://github.com/llmrb/mruby-curl.git:
       url: https://github.com/llmrb/mruby-curl.git
-      branch: v0.5.0.beta.1
-      commit: dfd037fd1e530dc164a04837a626abcd523f0453
-      version: 0.5.0.beta.1
+      branch: v0.6.0
+      commit: 01de1eda67b27b35369df606c60b416110bb8467
+      version: 0.6.0
     https://github.com/mattn/mruby-json.git:
       url: https://github.com/mattn/mruby-json.git
       branch: master
